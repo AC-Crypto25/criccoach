@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CricCoach - Premium Cricket Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-[#060b07] text-slate-100 flex justify-center min-h-screen selection:bg-amber-500 selection:text-black">
+
+    <div id="app-container" class="w-full max-w-md bg-[#0b140e] min-h-screen shadow-2xl relative pb-24 flex flex-col border-x border-emerald-950/40">
+        
+        <header class="sticky top-0 z-40 bg-[#0b140e]/95 backdrop-blur-md border-b border-emerald-900/20 px-5 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="bg-gradient-to-tr from-emerald-600 to-amber-500 p-2 rounded-xl shadow-md">
+                    <i data-lucide="trophy" class="w-5 h-5 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-extrabold tracking-tight text-white flex items-center gap-1">
+                        CRIC<span class="text-amber-500">COACH</span>
+                    </h1>
+                    <p class="text-[10px] text-emerald-400 font-semibold uppercase tracking-wider">Elite Training Engine</p>
+                </div>
+            </div>
+            <div>
+                <span class="bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> PRO SYSTEM
+                </span>
+            </div>
+        </header>
+
+        <main id="main-content" class="flex-1 p-4 overflow-y-auto">
+            </main>
+
+        <div id="detail-view" class="hidden fixed inset-0 z-50 bg-[#0b140e] overflow-y-auto p-4">
+            </div>
+
+        <div id="toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-amber-500 text-black px-4 py-2.5 rounded-xl font-bold text-xs shadow-xl hidden flex items-center gap-2 border border-amber-400">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span id="toast-text">Success</span>
+        </div>
+
+        <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-[#080e0a]/95 backdrop-blur-lg border-t border-emerald-900/30 grid grid-cols-5 py-3 z-40 px-1 shadow-2xl">
+            <button onclick="switchTab('batting')" id="nav-batting" class="flex flex-col items-center justify-center gap-1 transition-all duration-200">
+                <i data-lucide="zap" class="w-5 h-5"></i>
+                <span class="text-[9px] font-bold tracking-wide">Batting</span>
+            </button>
+            <button onclick="switchTab('bowling')" id="nav-bowling" class="flex flex-col items-center justify-center gap-1 transition-all duration-200">
+                <i data-lucide="orbit" class="w-5 h-5"></i>
+                <span class="text-[9px] font-bold tracking-wide">Bowling</span>
+            </button>
+            <button onclick="switchTab('fielding')" id="nav-fielding" class="flex flex-col items-center justify-center gap-1 transition-all duration-200">
+                <i data-lucide="shield" class="w-5 h-5"></i>
+                <span class="text-[9px] font-bold tracking-wide">Fielding</span>
+            </button>
+            <button onclick="switchTab('aicoach')" id="nav-aicoach" class="flex flex-col items-center justify-center gap-1 transition-all duration-200">
+                <i data-lucide="cpu" class="w-5 h-5"></i>
+                <span class="text-[9px] font-bold tracking-wide">AI Coach</span>
+            </button>
+            <button onclick="switchTab('admin')" id="nav-admin" class="flex flex-col items-center justify-center gap-1 transition-all duration-200">
+                <i data-lucide="sliders" class="w-5 h-5"></i>
+                <span class="text-[9px] font-bold tracking-wide">Admin</span>
+            </button>
+        </nav>
+    </div>
+
+    <script>
+        let currentTab = 'batting';
+        let chatHistory = [
+            { id: 1, sender: 'ai', text: 'Hey there! I am your AI Cricket Coach. Don\'t just practice hard—let\'s practice smart. Ask me to break down any shot, bowling grip, or fielding stance step-by-step, or send over a video/photo of your form for an instant biomechanical audit.', time: 'Just Now', file: null }
+        ];
+
+        let adminPipelineVideos = [
+            { id: 'p1', title: 'Mastering the Inswinging Yorker', category: 'bowling', skillKey: 'inswing_delivery', youtubeId: 'E_7Nen7Nf30', author: 'Cricket Cardio', keywords: 'cricket inswing tutorial' },
+            { id: 'p2', title: 'Advanced Slip Reflex Cordon Training', category: 'fielding', skillKey: 'slips_catching', youtubeId: '2K_Y88P_E6g', author: 'ProCoach', keywords: 'cricket slips catching' }
+        ];
+
+        // Central Database Object with verified, embeddable YouTube links & simplified terminology
+        const skillsData = {
+            batting: {
+                title: "Batting Performance Studio 🏏",
+                desc: "Master your balance, timing, and bat swing with clean, clear fundamentals.",
+                skills: [
+                    {
+                        key: 'cover_drive',
+                        title: 'The Cover Drive',
+                        difficulty: 'Intermediate',
+                        img: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=600',
+                        desc: 'The ultimate textbook cricket shot played to a ball wide of the off-stump.',
+                        layman: 'Think of this like stepping into a lunging punch. You want your weight moving directly toward where the ball is bouncing, and your elbow pointing right at your target.',
+                        instructions: [
+                            'Keep your head completely still and nose pointing over your front shoulder so you don\'t fall over sideways.',
+                            'Take a comfortable stride forward, placing your front foot right next to where the ball bounces.',
+                            'Swing your bat high-to-low in a straight vertical line, letting your dominant elbow lead the way.'
+                        ],
+                        drillVideo: 'TSxJVw57jqs', 
+                        masterclassVideo: 'yeImrfgNJoM' 
+                    },
+                    {
+                        key: 'pull_shot',
+                        title: 'The Pull Shot',
+                        difficulty: 'Advanced',
+                        img: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&q=80&w=600',
+                        desc: 'A powerful cross-bat weapon used to smash short, chest-high deliveries.',
+                        layman: 'Imagine swinging a baseball bat or pulling a heavy rope horizontally across your chest. You rock back onto your heels, open your shoulders, and swat the ball away.',
+                        instructions: [
+                            'As soon as you see the ball is short, step backward and slightly across toward your stumps.',
+                            'Extend your arms out fully away from your body to get massive swinging leverage.',
+                            'Roll your wrists downward right as you hit the ball to keep it safely on the ground.'
+                        ],
+                        drillVideo: 'DZqxt3Z7HlQ', 
+                        masterclassVideo: 'Lx_cUU84Y9g' 
+                    },
+                    {
+                        key: 'forward_defense',
+                        title: 'The Forward Defense',
+                        difficulty: 'Foundational',
+                        img: 'https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&q=80&w=600',
+                        desc: 'The shield. Used to block tough balls and save your wicket.',
+                        layman: 'Think of this as building a brick wall right in front of your toes. You aren\'t trying to hit the ball for runs; you are just using your bat as a shield to drop it dead.',
+                        instructions: [
+                            'Step your front foot forward toward the pitch of the ball, keeping your knee slightly bent.',
+                            'Hide your bat right behind your front leg pad so there is absolutely no gap for the ball to sneak through.',
+                            'Loosen your bottom grip right before impact so the bat absorbs the ball\'s speed completely.'
+                        ],
+                        drillVideo: '0ZhXvTzVr0s', 
+                        masterclassVideo: '5TcZlYt4AUQ' 
+                    }
+                ]
+            },
+            bowling: {
+                title: "Bowling Mechanics Lab ⚾",
+                desc: "Learn to control your wrist, generate real pace, and spin it past the bat.",
+                skills: [
+                    {
+                        key: 'outswing_delivery',
+                        title: 'The Outswing Delivery',
+                        difficulty: 'Advanced',
+                        img: 'https://images.unsplash.com/photo-1593341604618-0281c55dc206?auto=format&fit=crop&q=80&w=600',
+                        desc: 'Making the ball move through the air away from a right-handed batsman.',
+                        layman: 'Imagine throwing a baseball with a slight side-spin. By pointing the rough seam toward the slips and keeping your wrist rock-solid, the wind pushes the ball sideways.',
+                        instructions: [
+                            'Hold the ball with your index and middle fingers right on top of the seam, pointing it slightly toward the slips.',
+                            'Keep the smooth, shiny side of the ball facing toward the batsman on the left.',
+                            'Release the ball with a completely straight, locked wrist, letting it slide off your index finger.'
+                        ],
+                        drillVideo: '1kaLpettDAg', 
+                        masterclassVideo: 'h3N-BRQXTS4' 
+                    },
+                    {
+                        key: 'inswing_delivery',
+                        title: 'The Inswing Delivery',
+                        difficulty: 'Advanced',
+                        img: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=600',
+                        desc: 'Making the ball curve inward through the air toward the batsman\'s legs.',
+                        layman: 'This is the opposite of outswing. You tilt the seam inward toward the leg side, causing the ball to dive back in toward the stumps like an incoming missile.',
+                        instructions: [
+                            'Grip the ball normally, but angle the main seam line slightly toward the leg-side/fine-leg corner.',
+                            'Ensure the shiny, polished half of the ball is facing outward toward the off-side.',
+                            'Drive your bowling arm down perfectly straight, pushing through hard with your thumb pointing downward.'
+                        ],
+                        drillVideo: '1kaLpettDAg', 
+                        masterclassVideo: 'h3N-BRQXTS4' 
+                    },
+                    {
+                        key: 'off_break',
+                        title: 'The Off-Break (Finger Spin)',
+                        difficulty: 'Intermediate',
+                        img: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=600',
+                        desc: 'Spinning the ball off the pitch from right to left.',
+                        layman: 'Think of this exactly like twisting a doorknob open aggressively. Your index finger rips over the seam to make the ball spin sideways like a top.',
+                        instructions: [
+                            'Spread your index and middle fingers wide across the seam to get a firm, deep hold.',
+                            'At the exact microsecond of release, twist your wrist and index finger downward hard clockwise.',
+                            'Snap your body forward over your front leg to give the ball extra bounce and speed.'
+                        ],
+                        drillVideo: '1kaLpettDAg', 
+                        masterclassVideo: 'yeImrfgNJoM' 
+                    }
+                ]
+            },
+            fielding: {
+                title: "Fielding & Reflex Arena 🧤",
+                desc: "Isolating core ground intercepts from highly specialized catching techniques.",
+                skills: [
+                    {
+                        key: 'basics_of_catching',
+                        title: 'Basics of Catching',
+                        difficulty: 'Foundational',
+                        img: 'https://images.unsplash.com/photo-1594470115953-f3b14594d68b?auto=format&fit=crop&q=80&w=600',
+                        desc: 'The core template for catching low and high balls without dropping them.',
+                        layman: 'Think of your hands like a soft, padded bucket or catching an egg. You don\'t poke at the ball; you let it fall into your hands and pull it back to absorb the impact.',
+                        instructions: [
+                            'Create a large "cup" with your hands—pinkies touching for low balls, thumbs touching for high ones.',
+                            'Keep your eyes locked onto the ball until it is securely inside your palms.',
+                            'Pull your hands back toward your chest the moment the ball hits to eliminate bounciness.'
+                        ],
+                        drillVideo: 'TSxJVw57jqs', 
+                        masterclassVideo: 'yeImrfgNJoM' 
+                    },
+                    {
+                        key: 'ground_fielding',
+                        title: 'Ground Fielding (The Barrier)',
+                        difficulty: 'Intermediate',
+                        img: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=600',
+                        desc: 'Safely blocking and picking up hard, rolling ground balls on the boundary.',
+                        layman: 'This is all about putting a double-layer insurance policy behind the ball. If your hands miss it, your leg blocks it. You form a literal human wall.',
+                        instructions: [
+                            'Sprint fast toward the ball, then slow down right before it arrives to get your balance.',
+                            'Drop your knee down sideways onto the grass, locking it against your opposite heel to close all gaps.',
+                            'Scoop the ball up cleanly with both hands right in the middle of your knee barrier.'
+                        ],
+                        drillVideo: '0ZhXvTzVr0s', 
+                        masterclassVideo: '5TcZlYt4AUQ' 
+                    },
+                    {
+                        key: 'slips_catching',
+                        title: 'Slip Cordon Catching',
+                        difficulty: 'Expert',
+                        img: 'https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?auto=format&fit=crop&q=80&w=600',
+                        desc: 'Ultra-fast, split-second reflex catches off the bat edge.',
+                        layman: 'You are like a goalkeeper waiting for a penalty kick. You sit low, look at the bat, and spring sideways using instant raw reflexes.',
+                        instructions: [
+                            'Squat very low with your feet wider than your shoulders and your hands dangling open near your shins.',
+                            'Do not look at the bowler. Lock your vision purely onto the outside edge of the batsman\'s bat blade.',
+                            'Relax your mind. Let your body jump sideways automatically toward any deflection without thinking.'
+                        ],
+                        drillVideo: 'DZqxt3Z7HlQ', 
+                        masterclassVideo: 'Lx_cUU84Y9g' 
+                    }
+                ]
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            switchTab('batting');
+            lucide.createIcons();
+        });
+
+        function switchTab(tabId) {
+            currentTab = tabId;
+            const navigationKeys = ['batting', 'bowling', 'fielding', 'aicoach', 'admin'];
+            
+            navigationKeys.forEach(t => {
+                const element = document.getElementById(`nav-${t}`);
+                if (t === tabId) {
+                    element.className = "flex flex-col items-center justify-center gap-1 text-amber-500 transition-all duration-200 active:scale-95";
+                } else {
+                    element.className = "flex flex-col items-center justify-center gap-1 text-emerald-600/60 transition-all duration-200 active:scale-95";
+                }
+            });
+
+            closeDetail();
+
+            if (['batting', 'bowling', 'fielding'].includes(tabId)) {
+                renderSkillsView(tabId);
+            } else if (tabId === 'aicoach') {
+                renderAiCoachView();
+            } else if (tabId === 'admin') {
+                renderAdminView();
+            }
+            lucide.createIcons();
+        }
+
+        function renderSkillsView(categoryKey) {
+            const moduleData = skillsData[categoryKey];
+            const contentRegion = document.getElementById('main-content');
+            
+            let template = `
+                <div class="mb-5 bg-gradient-to-r from-emerald-950/40 to-slate-900/40 p-4 rounded-2xl border border-emerald-900/20">
+                    <h2 class="text-xl font-black text-white flex items-center gap-2">${moduleData.title}</h2>
+                    <p class="text-xs text-emerald-400/80 mt-1">${moduleData.desc}</p>
+                </div>
+                <div class="grid grid-cols-1 gap-4">
+            `;
+
+            moduleData.skills.forEach(skill => {
+                template += `
+                    <div onclick="openDetail('${categoryKey}', '${skill.key}')" class="bg-gradient-to-b from-emerald-950/30 to-emerald-950/70 rounded-2xl border border-emerald-900/30 overflow-hidden cursor-pointer hover:border-amber-500/40 transition-all duration-200 shadow-md group">
+                        <div class="relative h-36 w-full">
+                            <img src="${skill.img}" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0b140e] via-transparent to-transparent"></div>
+                            <span class="absolute top-3 right-3 text-[9px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded uppercase tracking-wider">${skill.difficulty}</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-base font-bold text-white group-hover:text-amber-400 flex items-center justify-between">
+                                ${skill.title}
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-emerald-500"></i>
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1 line-clamp-2">${skill.desc}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            template += `</div>`;
+            contentRegion.innerHTML = template;
+        }
+
+        function openDetail(categoryKey, skillKey) {
+            const skill = skillsData[categoryKey].skills.find(s => s.key === skillKey);
+            const overlay = document.getElementById('detail-view');
+            
+            overlay.innerHTML = `
+                <div class="w-full max-w-md mx-auto pb-24 animate-in slide-in-from-bottom-4 duration-200">
+                    <button onclick="closeDetail()" class="flex items-center gap-1.5 text-xs font-bold text-emerald-400 mb-4 bg-emerald-950/80 border border-emerald-900/40 px-3 py-2 rounded-xl">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Studio
+                    </button>
+
+                    <h2 class="text-2xl font-black text-white tracking-tight">${skill.title}</h2>
+                    
+                    <div class="bg-amber-500/10 rounded-2xl p-4 border border-amber-500/20 mt-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5 mb-1">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i> Simple Explanation
+                        </h4>
+                        <p class="text-xs text-amber-100/90 leading-relaxed">${skill.layman}</p>
+                    </div>
+
+                    <div class="bg-emerald-950/30 rounded-2xl p-4 border border-emerald-900/40 mt-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5 mb-3">
+                            <i data-lucide="list-ordered" class="w-4 h-4"></i> Step-by-Step Training Steps
+                        </h4>
+                        <ul class="space-y-3">
+                            ${skill.instructions.map((inst, idx) => `
+                                <li class="text-xs text-slate-300 flex items-start gap-2.5 leading-relaxed">
+                                    <span class="w-5 h-5 bg-emerald-900 text-emerald-400 font-bold text-[10px] flex items-center justify-center rounded-full shrink-0 mt-0.5">${idx + 1}</span>
+                                    <span>${inst}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="mt-5">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 mb-2">
+                            <i data-lucide="video" class="w-4 h-4 text-emerald-500"></i> Essential Drill Video
+                        </h4>
+                        <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-emerald-900/40 bg-black">
+                            <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/${skill.drillVideo}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 mb-2">
+                            <i data-lucide="award" class="w-4 h-4 text-amber-500"></i> Pro Player Masterclass
+                        </h4>
+                        <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-emerald-900/40 bg-black">
+                            <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/${skill.masterclassVideo}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            `;
+            overlay.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeDetail() {
+            document.getElementById('detail-view').classList.add('hidden');
+        }
+
+        function renderAiCoachView() {
+            const contentRegion = document.getElementById('main-content');
+            
+            let template = `
+                <div class="flex flex-col h-[calc(100vh-10.5rem)] animate-in fade-in duration-150">
+                    <div class="mb-2">
+                        <h2 class="text-xl font-black text-white flex items-center gap-2">Personal AI Tactical Unit</h2>
+                        <p class="text-[10px] text-emerald-400 font-medium">Ready to map out mechanics step-by-step.</p>
+                    </div>
+
+                    <div id="chat-stream" class="flex-1 overflow-y-auto bg-emerald-950/10 rounded-2xl p-3 border border-emerald-900/20 space-y-3 mb-2 flex flex-col no-scrollbar">
+            `;
+
+            chatHistory.forEach(msg => {
+                const isAi = msg.sender === 'ai';
+                template += `
+                    <div class="flex flex-col ${isAi ? 'items-start' : 'items-end'} max-w-[85%] ${isAi ? 'self-start' : 'self-end'}">
+                        <div class="p-3 rounded-2xl text-xs leading-relaxed ${isAi ? 'bg-emerald-950/60 border border-emerald-900/40 text-slate-200' : 'bg-amber-500 text-black font-semibold'}">
+                            ${msg.file ? `<div class="mb-2 rounded-lg overflow-hidden border border-black/20 shadow"><img src="${msg.file}" class="max-h-32 object-cover w-full"/></div>` : ''}
+                            ${msg.text}
+                        </div>
+                        <span class="text-[8px] text-slate-500 mt-1 px-1">${msg.time}</span>
+                    </div>
+                `;
+            });
+
+            template += `
+                        <div id="typing-indicator" class="hidden flex items-center gap-2 bg-emerald-950/80 p-2.5 rounded-xl border border-emerald-900/30 self-start text-[10px] text-emerald-400">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                            <span>Deconstructing movement framework...</span>
+                        </div>
+                    </div>
+
+                    <div id="preview-bar" class="hidden bg-emerald-950 border border-emerald-900/50 p-2 rounded-xl mb-2 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <img id="preview-thumb" src="" class="w-8 h-8 object-cover rounded border border-emerald-800" />
+                            <span class="text-[10px] text-slate-300 font-mono truncate max-w-[180px]" id="preview-filename"></span>
+                        </div>
+                        <button onclick="clearAttachment()" class="text-slate-400"><i data-lucide="x" class="w-4 h-4"></i></button>
+                    </div>
+
+                    <div class="flex items-center gap-2 bg-[#080e0a] border border-emerald-900/40 rounded-2xl p-1.5 relative">
+                        <button onclick="triggerFileInput()" class="p-2.5 text-emerald-400 bg-emerald-950/80 rounded-xl active:scale-95 transition-all">
+                            <i data-lucide="camera" class="w-4 h-4"></i>
+                        </button>
+                        <input type="file" id="camera-file-input" accept="image/*" class="hidden" onchange="handleFileSelect(event)" />
+                        
+                        <input type="text" id="chat-input" onkeypress="if(event.key === 'Enter') submitChatMessage()" placeholder="Ask me to break down any drill or position..." class="flex-1 bg-transparent text-xs text-white placeholder-slate-600 focus:outline-none px-2" />
+                        
+                        <button onclick="submitChatMessage()" class="p-2.5 text-black bg-amber-500 rounded-xl font-bold">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            contentRegion.innerHTML = template;
+            setTimeout(() => {
+                const stream = document.getElementById('chat-stream');
+                if (stream) stream.scrollTop = stream.scrollHeight;
+            }, 20);
+        }
+
+        let selectedFileBase64 = null;
+        let selectedFileName = "";
+
+        function triggerFileInput() {
+            document.getElementById('camera-file-input').click();
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files;
+            if (!file) return;
+            selectedFileName = file.name;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                selectedFileBase64 = evt.target.result;
+                document.getElementById('preview-thumb').src = selectedFileBase64;
+                document.getElementById('preview-filename').innerText = file.name;
+                document.getElementById('preview-bar').classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function clearAttachment() {
+            selectedFileBase64 = null;
+            selectedFileName = "";
+            document.getElementById('camera-file-input').value = "";
+            document.getElementById('preview-bar').classList.add('hidden');
+        }
+
+        function submitChatMessage() {
+            const input = document.getElementById('chat-input');
+            const messageText = input.value.trim();
+
+            if (!messageText && !selectedFileBase64) return;
+
+            chatHistory.push({
+                id: Date.now(),
+                sender: 'user',
+                text: messageText || `Uploaded form file: ${selectedFileName}`,
+                time: 'Just Now',
+                file: selectedFileBase64
+            });
+
+            renderAiCoachView();
+            const indicator = document.getElementById('typing-indicator');
+            indicator.classList.remove('hidden');
+
+            const userPrompt = messageText.toLowerCase();
+            clearAttachment();
+
+            setTimeout(() => {
+                let aiReply = "Let's work through this step-by-step:<br/><br/>1. **Your Base:** Set up with feet shoulder-width apart to keep from tilting.<br/>2. **The Fix:** Point your front shoulder right at the target line.<br/>3. **The Swing:** Let your arms move freely without squeezing the grip too tightly. Try doing 15 shadow swings in front of a mirror to lock this in!";
+                
+                if (userPrompt.includes('drive') || userPrompt.includes('cover')) {
+                    aiReply = "Let's master the **Cover Drive** together. Here is your step-by-step guide:<br/><br/>**Step 1: The Setup:** Stand relaxed, staring straight down the track. Don't freeze your weight on your heels.<br/><br/>**Step 2: The Stride:** Lean your head towards where the ball is landing first, then let your front foot follow. Think of stepping right into the ball's personal space.<br/><br/>**Step 3: The Secret:** Point your leading elbow high up into the sky. If your elbow points down, the ball will fly into the air and get you caught. Keep it high to hit it safely along the grass.";
+                } else if (userPrompt.includes('pace') || userPrompt.includes('bowl') || userPrompt.includes('outswing')) {
+                    aiReply = "Let's break down high-velocity **Outswing Bowling** mechanics:<br/><br/>**Step 1: The Grip:** Place your index and middle fingers slightly off-center along the leather seam. Tilt it out towards the slip fielders.<br/><br/>**Step 2: The Front Leg:** When your front foot slams down into the crease, lock that knee out straight like an emergency brake. This transfers all your running speed straight up into your shoulder.<br/><br/>**Step 3: The Snap:** Pull your non-bowling arm down hard to your hip while snapping your wrist forward. Let the ball roll right off your index finger.";
+                } else if (userPrompt.includes('catch') || userPrompt.includes('fielding')) {
+                    aiReply = "Let's fix your **Catching Foundation** so you never drop a match-winner:<br/><br/>**Step 1: Eye Level:** Keep your eyes perfectly level. If you tilt your head while running, the ball looks like it is bouncing up and down in the air.<br/><br/>**Step 2: The Pocket:** Do not reach out stiffly with your fingers pointed straight at the ball—that hurts and pops the ball out. Open your fingers like an open book.<br/><br/>**Step 3: The Give:** The moment the leather meets your hand, draw your elbows backwards toward your belly. This acts like car suspension and kills the rebound.";
+                }
+
+                chatHistory.push({
+                    id: Date.now() + 1,
+                    sender: 'ai',
+                    text: aiReply,
+                    time: 'Just Now',
+                    file: null
+                });
+
+                renderAiCoachView();
+            }, 1500);
+        }
+
+        function renderAdminView() {
+            const contentRegion = document.getElementById('main-content');
+            
+            let template = `
+                <div class="space-y-4 animate-in fade-in duration-150">
+                    <div>
+                        <h2 class="text-xl font-black text-white flex items-center gap-2">Admin Pipeline Dashboard</h2>
+                        <p class="text-xs text-emerald-400/80 mt-1">Simulated YouTube Data API Ingestion Channel</p>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-emerald-950/40 to-slate-900 border border-emerald-900/30 p-4 rounded-2xl">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Active API Key-Matchers</span>
+                            <span class="text-[9px] bg-emerald-900 text-emerald-300 px-2 py-0.5 rounded-full font-bold">LIVE CRAWLER</span>
+                        </div>
+                        <div class="flex flex-wrap gap-1.5 text-[10px] text-slate-300">
+                            <span class="bg-[#0f2315] border border-emerald-800 px-2 py-0.5 rounded">'cricket drive tutorial'</span>
+                            <span class="bg-[#0f2315] border border-emerald-800 px-2 py-0.5 rounded">'fielding long barrier'</span>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest pt-1">Buffered Video Streaming Influx</h3>
+                    <div class="space-y-3" id="pipeline-list">
+            `;
+
+            if (adminPipelineVideos.length === 0) {
+                template += `
+                    <div class="text-center p-8 bg-emerald-950/10 border border-emerald-900/20 rounded-2xl text-xs text-slate-500">
+                        <i data-lucide="folder-open" class="w-6 h-6 mx-auto mb-2 opacity-60"></i>
+                        Ingestion pipeline queue currently clear.
+                    </div>
+                `;
+            } else {
+                adminPipelineVideos.forEach(vid => {
+                    template += `
+                        <div class="bg-gradient-to-b from-[#0d1610] to-[#0a0f0b] border border-emerald-900/30 rounded-xl p-3 flex flex-col gap-3">
+                            <div class="flex gap-3">
+                                <div class="w-24 aspect-video bg-black rounded-lg overflow-hidden shrink-0 relative border border-emerald-900/40">
+                                    <img src="https://img.youtube.com/vi/${vid.youtubeId}/mqdefault.jpg" class="w-full h-full object-cover opacity-80" />
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <h4 class="text-xs font-bold text-white truncate">${vid.title}</h4>
+                                    <p class="text-[10px] text-emerald-400 mt-0.5">${vid.author}</p>
+                                    <div class="text-[8px] font-mono text-slate-500 uppercase tracking-wider mt-1">Target Module: ${vid.category} -> ${vid.skillKey}</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-end gap-2 border-t border-emerald-900/10 pt-2">
+                                <button onclick="rejectVideo('${vid.id}')" class="text-[10px] font-bold text-rose-400 bg-rose-950/30 border border-rose-900/30 px-3 py-1.5 rounded-lg">Reject</button>
+                                <button onclick="approveVideo('${vid.id}')" class="text-[10px] font-bold text-black bg-amber-500 px-3 py-1.5 rounded-lg shadow">Approve & Push</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            template += `</div></div>`;
+            contentRegion.innerHTML = template;
+        }
+
+        function approveVideo(id) {
+            const item = adminPipelineVideos.find(v => v.id === id);
+            if (!item) return;
+
+            const skillNode = skillsData[item.category].skills.find(s => s.key === item.skillKey);
+            if (skillNode) {
+                skillNode.drillVideo = item.youtubeId;
+            }
+
+            adminPipelineVideos = adminPipelineVideos.filter(v => v.id !== id);
+            showToast("Video dynamically assigned live to Skills Tab!");
+            renderAdminView();
+            lucide.createIcons();
+        }
+
+        function rejectVideo(id) {
+            adminPipelineVideos = adminPipelineVideos.filter(v => v.id !== id);
+            showToast("Video dropped from streaming buffer.");
+            renderAdminView();
+            lucide.createIcons();
+        }
+
+        function showToast(msg) {
+            const bar = document.getElementById('toast');
+            document.getElementById('toast-text').innerText = msg;
+            bar.classList.remove('hidden');
+            setTimeout(() => { bar.classList.add('hidden'); }, 3000);
+        }
+    </script>
+</body>
+</html>
