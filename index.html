@@ -3,666 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CricCoach - Premium Cricket Skill-Building</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>CricCoach AI - Elite Cricket Performance Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
+        /* Fluid bottom safety bounds for modern edge-to-edge smartphone viewports */
+        .pb-safe {
+            padding-bottom: calc(env(safe-area-inset-bottom) + 4.5rem);
         }
-        /* Custom dynamic scrollbars */
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #15803d;
-            border-radius: 10px;
-        }
-        /* Hide scrollbars for dynamic clean sub-windows */
+        /* Hide scrollbars but keep functionality intact */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
-<body class="bg-[#0b130e] text-slate-100 flex justify-center min-h-screen selection:bg-amber-500 selection:text-black">
+<body class="bg-slate-950 text-slate-50 antialiased font-sans select-none overflow-x-hidden">
 
-    <div id="app-container" class="w-full max-w-md bg-[#0f1c14] min-h-screen shadow-2xl relative pb-24 flex flex-col border-x border-emerald-950/40">
+    <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                <i class="fa-solid class fa-gradient fa-baseball-bat-ball text-slate-950 text-lg"></i>
+            </div>
+            <div>
+                <h1 class="text-base font-bold tracking-tight text-white leading-tight">CricCoach <span class="text-emerald-400 font-medium text-xs px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 ml-1">AI</span></h1>
+                <p id="header-context" class="text-[10px] text-slate-400 font-medium uppercase tracking-wider">Performance Studio</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-2">
+            <button onclick="switchTab('analytics')" class="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700/60 flex items-center justify-center text-slate-300 active:scale-95 transition-transform">
+                <i class="fa-solid fa-bolt text-xs text-amber-400"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="w-full max-w-md mx-auto px-4 pt-4 pb-safe min-h-[calc(100vh-4rem)]">
         
-        <header class="sticky top-0 z-40 bg-[#0f1c14]/95 backdrop-blur-md border-b border-emerald-900/30 px-5 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="bg-gradient-to-tr from-emerald-600 to-amber-500 p-2 rounded-xl shadow-md shadow-emerald-900/40">
-                    <i data-lucide="trophy" class="w-5 h-5 text-white"></i>
+        <section id="view-drills" class="tab-view space-y-5">
+            <div class="bg-gradient-to-r from-slate-900 to-slate-850 p-4 rounded-2xl border border-slate-800/80 shadow-xl">
+                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-md">Curated Syllabus</span>
+                <h2 class="text-xl font-extrabold text-white mt-1.5">Elite Video Library</h2>
+                <p class="text-xs text-slate-400 mt-1 leading-relaxed">Study elite biomechanical tutorials directly within your workspace to mirror precise fundamentals.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-lg group">
+                    <div class="relative aspect-video w-full bg-slate-950">
+                        <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/TSxJVw57jqs" title="Cover Drive Masterclass" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-3.5">
+                        <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1">
+                            <span class="text-emerald-400"><i class="fa-solid fa-circle-play mr-1"></i>Batting Mechanics</span>
+                            <span>4 mins</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white tracking-tight">The Ultimate Cover Drive Breakdown</h3>
+                        <p class="text-xs text-slate-400 mt-1">Isolate head position, front foot transfer mechanics, and vertical bat paths.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-lg group">
+                    <div class="relative aspect-video w-full bg-slate-950">
+                        <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/sS3L_q4hYhE" title="Pull Shot Masterclass" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-3.5">
+                        <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1">
+                            <span class="text-emerald-400"><i class="fa-solid fa-circle-play mr-1"></i>Short Ball Tactics</span>
+                            <span>4 mins</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white tracking-tight">Mastering the Power Pull Shot</h3>
+                        <p class="text-xs text-slate-400 mt-1">Correct arm extension and weight transfers on short-pitched deliveries.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-lg group">
+                    <div class="relative aspect-video w-full bg-slate-950">
+                        <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/0ZhXvTzVr0s" title="Forward Defense" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-3.5">
+                        <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1">
+                            <span class="text-emerald-400"><i class="fa-solid fa-circle-play mr-1"></i>Match Survival</span>
+                            <span>4 mins</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white tracking-tight">Perfect Front Foot Block / Defense</h3>
+                        <p class="text-xs text-slate-400 mt-1">Eradicate gaps between bat and pad to eliminate bowled and LBW pathways.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-coach" class="tab-view hidden flex flex-col h-[calc(100vh-10.5rem)]">
+            <div id="chat-scroller" class="flex-1 overflow-y-auto no-scrollbar space-y-3.5 pr-1 pb-4">
+                <div class="flex items-start space-x-3 max-w-[85%]">
+                    <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i class="fa-solid fa-robot text-xs text-slate-950"></i>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-3 rounded-2xl rounded-tl-none shadow-md">
+                        <p class="text-xs text-slate-200 leading-relaxed">Greetings player! Upload an image or frame of your current posture or setup, or ask any technical drill question below. Let's optimize your geometry.</p>
+                        <span class="text-[9px] text-slate-500 font-semibold block mt-1.5 uppercase tracking-wider">CricCoach Core</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload-preview-bar" class="hidden px-3 py-2 bg-slate-900/80 border border-slate-800 rounded-xl mb-2 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-regular fa-image text-emerald-400 text-sm"></i>
+                    <span id="preview-filename" class="text-xs text-slate-300 font-medium truncate max-w-[200px]">image.jpg</span>
+                </div>
+                <button onclick="clearSelectedImage()" class="text-slate-400 hover:text-rose-400 text-xs p-1"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 p-2 rounded-2xl shadow-xl flex items-center space-x-2">
+                <label class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700/60 flex items-center justify-center text-slate-300 cursor-pointer active:scale-95 transition-transform flex-shrink-0">
+                    <input type="file" id="media-input" accept="image/*" class="hidden" onchange="handleImageSelection()">
+                    <i class="fa-solid fa-camera text-sm text-slate-400"></i>
+                </label>
+                <input type="text" id="chat-input" placeholder="Ask about grip, stance, or technique..." class="flex-1 bg-transparent border-0 text-slate-200 text-xs font-medium placeholder-slate-500 focus:ring-0 focus:outline-none px-1">
+                <button onclick="dispatchMessage()" class="w-10 h-10 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center active:scale-95 transition-transform flex-shrink-0 shadow-lg shadow-emerald-500/10">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+            </div>
+        </section>
+
+        <section id="view-analytics" class="tab-view hidden space-y-4">
+            <div class="bg-gradient-to-br from-slate-900 to-indigo-950/40 p-4 rounded-2xl border border-slate-800/80 shadow-md">
+                <span class="text-[10px] uppercase font-bold tracking-widest text-indigo-400 bg-indigo-400/10 px-2 py-0.5 rounded-md">Live Diagnostics</span>
+                <h2 class="text-lg font-extrabold text-white mt-1.5">Biomechanical Tracking</h2>
+                <p class="text-xs text-slate-400 mt-1">Real-time analytical trends aggregated from structural check-ins and mock metrics processing.</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-slate-900 border border-slate-800 p-3.5 rounded-2xl flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-400">
+                        <span class="text-xs font-semibold">Bat Speed</span>
+                        <i class="fa-solid fa-gauge-high text-emerald-400 text-xs"></i>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-2xl font-black text-white tracking-tight">84</span> <span class="text-[10px] text-slate-500 font-bold uppercase">km/h</span>
+                        <span class="text-[10px] text-emerald-400 font-semibold block mt-0.5"><i class="fa-solid fa-arrow-trend-up mr-0.5"></i> +4.2% optimized</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 p-3.5 rounded-2xl flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-400">
+                        <span class="text-xs font-semibold">Contact Index</span>
+                        <i class="fa-solid fa-bullseye text-amber-400 text-xs"></i>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-2xl font-black text-white tracking-tight">91%</span>
+                        <span class="text-[10px] text-slate-500 font-bold uppercase block">Sweet-spot accuracy</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 p-3.5 rounded-2xl flex flex-col justify-between col-span-2">
+                    <div class="flex items-center justify-between text-slate-400">
+                        <span class="text-xs font-semibold">Backlift Geometry Vector</span>
+                        <span class="text-[10px] text-slate-400 font-bold px-2 py-0.5 bg-slate-800 rounded-md">Target: 22°</span>
+                    </div>
+                    <div class="mt-3 flex items-center justify-between">
+                        <div class="space-y-0.5">
+                            <span class="text-xl font-black text-white tracking-tight">24.8°</span>
+                            <span class="text-[10px] text-rose-400 font-semibold block"><i class="fa-solid fa-triangle-exclamation mr-0.5"></i> High Deviation</span>
+                        </div>
+                        <div class="w-24 bg-slate-800 h-2 rounded-full overflow-hidden relative">
+                            <div class="bg-rose-500 h-full w-[82%] rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-admin" class="tab-view hidden space-y-4">
+            <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
+                <h2 class="text-base font-bold text-white tracking-tight">Curator Intake Console</h2>
+                <p class="text-xs text-slate-400 mt-0.5">Ingest new learning frameworks or append manual telemetry tracking assets directly into local view containers.</p>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3.5">
+                <div>
+                    <label class="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Asset Module Title</label>
+                    <input type="text" id="admin-drill-title" placeholder="e.g., Leg Glance Mechanics" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500">
                 </div>
                 <div>
-                    <h1 class="text-lg font-extrabold tracking-tight text-white flex items-center gap-1">
-                        CRIC<span class="text-amber-500">COACH</span>
-                    </h1>
-                    <p class="text-[10px] text-emerald-400/80 font-semibold uppercase tracking-wider">Elite Training Engine</p>
+                    <label class="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">YouTube Target Video ID</label>
+                    <input type="text" id="admin-drill-id" placeholder="e.g., TSxJVw57jqs" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500">
                 </div>
+                <button onclick="executeAdminPublish()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-slate-700 font-bold text-xs rounded-xl tracking-wide transition-colors active:scale-[0.99]">
+                    Append Curated Module
+                </button>
             </div>
-            <div class="flex items-center gap-2">
-                <span class="bg-emerald-950 text-emerald-400 border border-emerald-800/60 text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> LIVE PRO
-                </span>
-            </div>
-        </header>
+        </section>
 
-        <main id="main-content" class="flex-1 p-4 overflow-y-auto">
-            </main>
+    </main>
 
-        <div id="detail-view" class="hidden fixed inset-0 z-50 bg-[#0f1c14] overflow-y-auto p-4 animate-in fade-in slide-in-from-bottom-5 duration-200">
-            </div>
+    <nav class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900/90 backdrop-blur-md border-t border-slate-800 px-3 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] shadow-2xl">
+        <div class="max-w-md mx-auto grid grid-cols-4 gap-1">
+            
+            <button id="btn-drills" onclick="switchTab('drills')" class="tab-btn flex flex-col items-center justify-center space-y-1 py-1 text-emerald-400 transition-colors">
+                <i class="fa-solid fa-graduation-cap text-base"></i>
+                <span class="text-[9px] font-bold tracking-tight">Syllabus</span>
+            </button>
 
-        <div id="toast" class="fixed top-18 left-1/2 transform -translate-x-1/2 z-50 bg-amber-500 text-black px-4 py-2.5 rounded-xl font-bold text-xs shadow-xl hidden flex items-center gap-2 border border-amber-400 animate-bounce">
-            <i data-lucide="check-circle" class="w-4 h-4"></i>
-            <span id="toast-text">Success</span>
+            <button id="btn-coach" onclick="switchTab('coach')" class="tab-btn flex flex-col items-center justify-center space-y-1 py-1 text-slate-500 transition-colors">
+                <div class="relative">
+                    <i class="fa-solid fa-user-astronaut text-base"></i>
+                    <span class="absolute -top-1 -right-2 w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                </div>
+                <span class="text-[9px] font-bold tracking-tight">AI Coach</span>
+            </button>
+
+            <button id="btn-analytics" onclick="switchTab('analytics')" class="tab-btn flex flex-col items-center justify-center space-y-1 py-1 text-slate-500 transition-colors">
+                <i class="fa-solid fa-chart-simple text-base"></i>
+                <span class="text-[9px] font-bold tracking-tight">Metrics</span>
+            </button>
+
+            <button id="btn-admin" onclick="switchTab('admin')" class="tab-btn flex flex-col items-center justify-center space-y-1 py-1 text-slate-500 transition-colors">
+                <i class="fa-solid fa-sliders text-base"></i>
+                <span class="text-[9px] font-bold tracking-tight">Admin</span>
+            </button>
+
         </div>
-
-        <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-[#0c1710]/95 backdrop-blur-lg border-t border-emerald-900/40 grid grid-cols-5 py-2.5 z-40 px-1 shadow-2xl">
-            <button onclick="switchTab('batting')" id="nav-batting" class="flex flex-col items-center justify-center gap-1 text-emerald-500 transition-all duration-200 active:scale-95">
-                <i data-lucide="zap" class="w-5 h-5"></i>
-                <span class="text-[10px] font-semibold tracking-wide">Batting</span>
-            </button>
-            <button onclick="switchTab('bowling')" id="nav-bowling" class="flex flex-col items-center justify-center gap-1 text-emerald-600/70 transition-all duration-200 active:scale-95">
-                <i data-lucide="orbit" class="w-5 h-5"></i>
-                <span class="text-[10px] font-semibold tracking-wide">Bowling</span>
-            </button>
-            <button onclick="switchTab('fielding')" id="nav-fielding" class="flex flex-col items-center justify-center gap-1 text-emerald-600/70 transition-all duration-200 active:scale-95">
-                <i data-lucide="shield" class="w-5 h-5"></i>
-                <span class="text-[10px] font-semibold tracking-wide">Fielding</span>
-            </button>
-            <button onclick="switchTab('aicoach')" id="nav-aicoach" class="flex flex-col items-center justify-center gap-1 text-emerald-600/70 transition-all duration-200 active:scale-95 relative">
-                <i data-lucide="cpu" class="w-5 h-5"></i>
-                <span class="text-[10px] font-semibold tracking-wide">AI Coach</span>
-            </button>
-            <button onclick="switchTab('admin')" id="nav-admin" class="flex flex-col items-center justify-center gap-1 text-emerald-600/70 transition-all duration-200 active:scale-95">
-                <i data-lucide="sliders" class="w-5 h-5"></i>
-                <span class="text-[10px] font-semibold tracking-wide">Admin</span>
-            </button>
-        </nav>
-    </div>
+    </nav>
 
     <script>
+        // Track the presence of uploaded media
+        let targetedImagePayload = null;
+
         /**
-         * GEMINI MULTIMODAL API CONFIGURATION PREP
-         * Format payloads to match Google's standard 'parts' layout array structure.
+         * State Router - Manages current active view panel layout
          */
-        const GEMINI_API_KEY = 'YOUR_KEY_HERE';
-        const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+        function switchTab(targetTabId) {
+            // Hide all structural tabs
+            document.querySelectorAll('.tab-view').forEach(view => view.classList.add('hidden'));
+            
+            // Strip active state formatting from all control triggers
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('text-emerald-400');
+                btn.classList.add('text-slate-500');
+            });
 
-        // Global Application Architecture State
-        let currentTab = 'batting';
-        let chatHistory = [
-            { id: 1, sender: 'ai', text: 'Welcome to CricCoach Premium Arena. I am your elite tactical AI Coach trained in the mechanical paradigms of Steffan Jones (Iso-metrics & Speed) and Ian Pont (4 Tent Pegs). Upload video/images or ask technique questions!', time: 'Just Now', file: null }
-        ];
-        
-        // Mock State For Automated Admin Pipeline Data Routing System
-        let adminPipelineVideos = [
-            { id: 'v1', title: 'Mastering the Cover Drive | Elite Mechanics', category: 'batting', skillKey: 'cover_drive', youtubeId: '809wHmsBv6A', author: 'ProCricket Academy', keywords: 'cricket cover drive tutorial' },
-            { id: 'v2', title: 'The Perfect Outswing Release & Seam Indexing', category: 'bowling', skillKey: 'outswing_delivery', youtubeId: 'Hj7qR759Zc0', author: 'PaceLab Intl', keywords: 'cricket outswing tutorial' },
-            { id: 'v3', title: 'Slips Cordons: Low Edge Deflection Security Drills', category: 'fielding', skillKey: 'slips_catching', youtubeId: 'v8w7X9k8W7Y', author: 'Elite Fielding Hub', keywords: 'slips catching drills' }
-        ];
+            // Reveal targeted view interface
+            document.getElementById(`view-${targetTabId}`).classList.remove('hidden');
+            
+            // Format corresponding control element 
+            document.getElementById(`btn-${targetTabId}`).classList.remove('text-slate-500');
+            document.getElementById(`btn-${targetTabId}`).classList.add('text-emerald-400');
 
-        // Central Database Object containing explicitly assigned, preloaded YouTube assets and guides
-        const skillsData = {
-            batting: {
-                title: "Batting Skill Mastery",
-                desc: "Refine balance, stroke play, and defensive footwork frameworks.",
-                skills: [
-                    {
-                        key: 'cover_drive',
-                        title: 'Cover Drive',
-                        difficulty: 'Intermediate',
-                        img: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=600',
-                        desc: 'The hallmark of text-book elite stroke-play against overpitched deliveries.',
-                        instructions: [
-                            'Maintain head directly over the front shoulder line for true mechanical balance.',
-                            'Leap into alignment, stepping your front foot close to the dynamic line of the bouncing ball.',
-                            'Present a highly vertical bat face, striking dynamically under your eyes with a high-to-low high elbow finishing swing.'
-                        ],
-                        drillVideo: '809wHmsBv6A', // Real high quality Cover Drive tutorials
-                        masterclassVideo: 'p99_nE_G70Q'
-                    },
-                    {
-                        key: 'pull_shot',
-                        title: 'Pull Shot',
-                        difficulty: 'Advanced',
-                        img: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Dissecting short-pitched bowling configurations with horizontal precision control.',
-                        instructions: [
-                            'Execute a rapid backward and across trigger movement toward the off-stump vector.',
-                            'Pivot hard on your front foot while keeping your hands high to access dominant leverage over the rising bounce.',
-                            'Roll your wrists precisely at contact point to force the ball downward securely.'
-                        ],
-                        drillVideo: 'TfF7uUeD1w8', // Real dedicated Pull shot video
-                        masterclassVideo: 'tD06V06mG98'
-                    },
-                    {
-                        key: 'forward_defense',
-                        title: 'Forward Defense',
-                        difficulty: 'Foundational',
-                        img: 'https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Neutralizing dynamic spin or pace threat lines with technical stability.',
-                        instructions: [
-                            'Push your weight forward into a strong, stable knee bend tracking the trajectory.',
-                            'Keep the bat strictly behind the pad line to eliminate structural inside-edges.',
-                            'Ensure completely soft hands at contact so the ball drops dead safely into the pitch surface.'
-                        ],
-                        drillVideo: 'L_Wk9bEwM-U', // Real technical forward defense video
-                        masterclassVideo: 'p3E7gA6_y7k'
-                    }
-                ]
-            },
-            bowling: {
-                title: "Bowling Mechanics lab",
-                desc: "Optimize biomechanical speed parameters, wrist releases, and spinning dynamics.",
-                skills: [
-                    {
-                        key: 'outswing_delivery',
-                        title: 'Outswing Delivery',
-                        difficulty: 'Advanced',
-                        img: 'https://images.unsplash.com/photo-1593341604618-0281c55dc206?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Aerodynamic mastery moving the ball away from right-handed batters.',
-                        instructions: [
-                            'Angle the seam precisely at 15 to 20 degrees towards first/second slip.',
-                            'Ensure the polished half of the leather resides on the leg side matrix facing forward.',
-                            'Maintain a firm, upright wrist tracking down the target zone, pulling back with index-finger emphasis.'
-                        ],
-                        drillVideo: 'Hj7qR759Zc0', // High quality verified outswing mechanics
-                        masterclassVideo: 'XWn1k_hZ1zY'
-                    },
-                    {
-                        key: 'inswing_delivery',
-                        title: 'Inswing Delivery',
-                        difficulty: 'Advanced',
-                        img: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Configuring dynamic late movement cutting back sharply into pads or stumps.',
-                        instructions: [
-                            'Angle the vertical seam line towards fine leg or leg slip coordinates.',
-                            'Point the rough or heavy side facing the off-side to force inward drift paradigms.',
-                            'Release with a highly robust wrist alignment driving directly down through the batter.'
-                        ],
-                        drillVideo: 'hCH90qA9wz8', // Dedicated inswing video
-                        masterclassVideo: 'z7y-mS0T5B8'
-                    },
-                    {
-                        key: 'off_break',
-                        title: 'Off-Break Delivery',
-                        difficulty: 'Intermediate',
-                        img: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Classic finger spin tweaked from off-side to break back into the stumps.',
-                        instructions: [
-                            'Index finger hooked firmly across the prominent seam loop track.',
-                            'Execute an aggressive right-to-left index finger tweak to maximize rotation RPM.',
-                            'Drive high over the front bracing foot to achieve optimal parabolic flight drop.'
-                        ],
-                        drillVideo: 'bS620lP0S0o', // Real off-spin tweak mechanics
-                        masterclassVideo: '8E4O_NlXjrs'
-                    }
-                ]
-            },
-            fielding: {
-                title: "Fielding & Agility Systems",
-                desc: "Isolating structural catching foundational frameworks from elite situational drills.",
-                skills: [
-                    {
-                        key: 'basics_of_catching',
-                        title: 'Basics of Catching',
-                        difficulty: 'Foundational',
-                        img: 'https://images.unsplash.com/photo-1594470115953-f3b14594d68b?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Core universal foundational techniques for handling high and low ball intercepts.',
-                        instructions: [
-                            'Hand Positioning: Create a clean "cup" arrangement (fingers facing up for skies, down for waist vectors).',
-                            'Soft Hands: Draw the hands backwards flexibly upon contact to dissipate dynamic velocity.',
-                            'Eye Tracking: Maintain solid focus locking the ball trajectory into the center palms.',
-                            'Footwork Base: Ensure dynamic balance underneath the plummeting sphere.'
-                        ],
-                        drillVideo: 'TfD8iZ23Czo', // General catching basics
-                        masterclassVideo: 'oYqXbE9eU04'
-                    },
-                    {
-                        key: 'ground_fielding',
-                        title: 'Ground Fielding Mechanics',
-                        difficulty: 'Intermediate',
-                        img: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Pure ground defense mechanics excluding any catch assets. Sliders, long barrier, and pursuits.',
-                        instructions: [
-                            'Attack the rolling ball aggressively, keeping weight balanced over your balls of feet.',
-                            'Adopt the "Long Barrier" framework by turning the back knee down onto the grass to block escapes.',
-                            'Deploy professional sliding tracking mechanics when turning boundary chases.'
-                        ],
-                        drillVideo: 'o9wWjS7Xh7o', // Ground fielding & sliding purely
-                        masterclassVideo: '6YI7Y6X8I-w'
-                    },
-                    {
-                        key: 'slips_catching',
-                        title: 'Slips Catching Core',
-                        difficulty: 'Expert',
-                        img: 'https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Hyper-focused reactive training structures for handling low-cup deflection trajectories.',
-                        instructions: [
-                            'Establish an incredibly wide, low stance base with relaxed hands ready near knees.',
-                            'Track movement explicitly off the bat edge rather than watching bowler mechanics entirely.',
-                            'Develop rapid reflexive micro-adjustments using the soft low-cup layout.'
-                        ],
-                        drillVideo: 'd8X79Wl7zXw', // Slip cordon reflex video
-                        masterclassVideo: 'uH3L-qjT6K4'
-                    }
-                ]
+            // Set subheader state description
+            const contextMap = {
+                'drills': 'Performance Studio',
+                'coach': 'Multimodal Assistant Active',
+                'analytics': 'Biomechanical Telemetry',
+                'admin': 'System Curator Console'
+            };
+            document.getElementById('header-context').innerText = contextMap[targetTabId];
+
+            // Re-align scroll layer metrics if AI channel selected
+            if(targetTabId === 'coach') {
+                autoScrollChatToTerminal();
             }
-        };
-
-        // Initialize App & Mount Engine
-        window.addEventListener('DOMContentLoaded', () => {
-            switchTab('batting');
-            lucide.createIcons();
-        });
-
-        // Dynamic State-Driven View Router
-        function switchTab(tabId) {
-            currentTab = tabId;
-            
-            // Update Active UI Navigation State
-            const navigationTabs = ['batting', 'bowling', 'fielding', 'aicoach', 'admin'];
-            navigationTabs.forEach(tab => {
-                const btn = document.getElementById(`nav-${tab}`);
-                if (tab === tabId) {
-                    btn.classList.remove('text-emerald-600/70');
-                    btn.classList.add('text-amber-500');
-                } else {
-                    btn.classList.remove('text-amber-500');
-                    btn.classList.add('text-emerald-600/70');
-                }
-            });
-
-            // Close modal overlays automatically on tab mutations
-            closeDetail();
-
-            const mainContent = document.getElementById('main-content');
-            
-            if (tabId === 'batting' || tabId === 'bowling' || tabId === 'fielding') {
-                renderSkillsView(tabId);
-            } else if (tabId === 'aicoach') {
-                renderAiCoachView();
-            } else if (tabId === 'admin') {
-                renderAdminView();
-            }
-            lucide.createIcons();
         }
 
-        // Render Skill Grid Interfaces
-        function renderSkillsView(categoryKey) {
-            const data = skillsData[categoryKey];
-            const mainContent = document.getElementById('main-content');
-            
-            let html = `
-                <div class="mb-4 animate-in fade-in duration-200">
-                    <h2 class="text-xl font-black text-white flex items-center gap-2">
-                        ${data.title}
-                    </h2>
-                    <p class="text-xs text-emerald-400/80 mt-1">${data.desc}</p>
-                </div>
-                <div class="grid grid-cols-1 gap-4 mt-2">
-            `;
-
-            data.skills.forEach(skill => {
-                html += `
-                    <div onclick="openDetail('${categoryKey}', '${skill.key}')" class="bg-gradient-to-b from-emerald-950/40 to-emerald-950/90 rounded-2xl border border-emerald-900/30 overflow-hidden cursor-pointer hover:border-amber-500/40 transition-all duration-300 group shadow-lg active:scale-[0.99]">
-                        <div class="relative h-40 w-full overflow-hidden">
-                            <img src="${skill.img}" alt="${skill.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#0f1c14] via-transparent to-transparent"></div>
-                            <span class="absolute top-3 right-3 text-[10px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded-md uppercase tracking-wider shadow">
-                                ${skill.difficulty}
-                            </span>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-base font-bold text-white group-hover:text-amber-400 transition-colors flex items-center justify-between">
-                                ${skill.title}
-                                <i data-lucide="arrow-right" class="w-4 h-4 text-emerald-500 group-hover:translate-x-1 transition-transform"></i>
-                            </h3>
-                            <p class="text-xs text-slate-400 mt-1 line-clamp-2">${skill.desc}</p>
-                        </div>
-                    </div>
-                `;
-            });
-
-            html += `</div>`;
-            mainContent.innerHTML = html;
-        }
-
-        // Open Dedicated Detail View Overlay with clean transitions
-        function openDetail(categoryKey, skillKey) {
-            const skill = skillsData[categoryKey].skills.find(s => s.key === skillKey);
-            const detailView = document.getElementById('detail-view');
-            
-            detailView.innerHTML = `
-                <div class="w-full max-w-md mx-auto pb-24 animate-in slide-in-from-bottom-6 duration-300">
-                    <button onclick="closeDetail()" class="flex items-center gap-2 text-xs font-bold text-emerald-400 mb-4 bg-emerald-950/80 border border-emerald-800/40 px-3 py-2 rounded-xl active:scale-95 transition-all">
-                        <i data-lucide="chevron-left" class="w-4 h-4"></i> Back to Dashboard
-                    </button>
-
-                    <h2 class="text-2xl font-black text-white tracking-tight">${skill.title}</h2>
-                    <span class="inline-block mt-1 text-[11px] font-extrabold bg-emerald-950 border border-emerald-800 text-emerald-400 px-2.5 py-0.5 rounded-full uppercase">
-                        Technical Directives
-                    </span>
-
-                    <div class="bg-gradient-to-br from-emerald-950/50 to-emerald-900/20 rounded-2xl p-4 border border-emerald-900/40 mt-4 shadow-inner">
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5 mb-3">
-                            <i data-lucide="bookmark-check" class="w-4 h-4"></i> Step-By-Step Mechanics
-                        </h4>
-                        <ul class="space-y-2.5">
-                            ${skill.instructions.map((inst, index) => `
-                                <li class="text-xs text-slate-300 flex items-start gap-2.5 leading-relaxed">
-                                    <span class="w-5 h-5 bg-emerald-900/60 text-emerald-400 font-bold text-[10px] flex items-center justify-center rounded-full shrink-0 border border-emerald-800/40">${index + 1}</span>
-                                    <span>${inst}</span>
-                                </li>
-                            `).join('')}
-                        </ul>
-                    </div>
-
-                    <div class="mt-5">
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5 mb-2">
-                            <i data-lucide="video" class="w-4 h-4"></i> Technical Drill Tutorial
-                        </h4>
-                        <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-emerald-900/50 bg-black shadow-lg">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/${skill.drillVideo}" title="Technical Drill" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </div>
-
-                    <div class="mt-5">
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-500 flex items-center gap-1.5 mb-2">
-                            <i data-lucide="award" class="w-4 h-4"></i> Pro Player Masterclass Analysis
-                        </h4>
-                        <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-emerald-900/50 bg-black shadow-lg">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/${skill.masterclassVideo}" title="Masterclass Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            detailView.classList.remove('hidden');
-            lucide.createIcons();
-            detailView.scrollTo(0, 0);
-        }
-
-        function closeDetail() {
-            document.getElementById('detail-view').classList.add('hidden');
-        }
-
-        // Render Premium AI Coach Interface
-        function renderAiCoachView() {
-            const mainContent = document.getElementById('main-content');
-            
-            let html = `
-                <div class="flex flex-col h-[calc(100vh-10rem)] animate-in fade-in duration-200">
-                    <div class="mb-2">
-                        <h2 class="text-xl font-black text-white flex items-center gap-2">
-                            Tactical AI Bio-Engine
-                        </h2>
-                        <p class="text-[11px] text-slate-400 leading-tight">Configured Framework: <span class="text-amber-400 font-medium">Jones, Pont, Such, Ahmed Multi-Model Engine</span></p>
-                    </div>
-
-                    <div id="chat-stream" class="flex-1 overflow-y-auto bg-emerald-950/20 rounded-2xl p-3 border border-emerald-900/30 space-y-3 mb-3 flex flex-col">
-            `;
-
-            chatHistory.forEach(msg => {
-                const isAi = msg.sender === 'ai';
-                html += `
-                    <div class="flex flex-col ${isAi ? 'items-start' : 'items-end'} max-w-[90%] ${isAi ? 'self-start' : 'self-end'}">
-                        <div class="p-3 rounded-2xl text-xs leading-relaxed shadow-sm ${isAi ? 'bg-gradient-to-r from-emerald-950 to-emerald-900 border border-emerald-800/40 text-slate-100' : 'bg-amber-500 text-black font-medium'}">
-                            ${msg.file ? `<div class="mb-2 rounded-lg overflow-hidden border border-black/10"><img src="${msg.file}" class="max-h-32 object-cover w-full" /></div>` : ''}
-                            ${msg.text}
-                        </div>
-                        <span class="text-[9px] text-slate-500 mt-1 px-1">${msg.time}</span>
-                    </div>
-                `;
-            });
-
-            html += `
-                        <div id="typing-indicator" class="hidden flex items-center gap-1.5 bg-emerald-950 p-2.5 rounded-xl border border-emerald-900/40 self-start text-[11px] text-emerald-400">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                            <span>AI Coach is processing mechanics...</span>
-                        </div>
-                    </div>
-
-                    <div id="preview-bar" class="hidden bg-emerald-950/80 border border-emerald-900/60 p-2 rounded-xl mb-2 flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <img id="preview-thumb" src="" class="w-10 h-10 object-cover rounded-md border border-emerald-800" />
-                            <div class="text-[10px]">
-                                <p class="text-white font-bold" id="preview-filename">asset.jpg</p>
-                                <p class="text-amber-400 font-medium" id="preview-status">Ready for Gemini Payload</p>
-                            </div>
-                        </div>
-                        <button onclick="clearAttachment()" class="text-slate-400 hover:text-white p-1"><i data-lucide="x" class="w-4 h-4"></i></button>
-                    </div>
-
-                    <div class="flex items-center gap-2 bg-[#0c1710] border border-emerald-900/50 rounded-2xl p-1.5 shadow-xl relative">
-                        <button onclick="triggerFileInput()" class="p-2.5 text-emerald-400 bg-emerald-950 rounded-xl border border-emerald-900/40 active:scale-95 transition-all">
-                            <i data-lucide="camera" class="w-5 h-5"></i>
-                        </button>
-                        <input type="file" id="camera-file-input" accept="image/*,video/*" class="hidden" onchange="handleFileSelect(event)" />
-                        
-                        <input type="text" id="chat-input" onkeypress="handleKeyPress(event)" placeholder="Ask Steffan Jones speed metrics..." class="flex-1 bg-transparent text-xs text-white placeholder-slate-500 focus:outline-none px-2" />
-                        
-                        <button onclick="submitChatMessage()" class="p-2.5 text-black bg-amber-500 rounded-xl hover:bg-amber-400 active:scale-95 transition-all font-bold">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
-            mainContent.innerHTML = html;
+        /**
+         * Local Chat Scroller Helper
+         */
+        function autoScrollChatToTerminal() {
+            const viewport = document.getElementById('chat-scroller');
             setTimeout(() => {
-                const stream = document.getElementById('chat-stream');
-                stream.scrollTop = stream.scrollHeight;
+                viewport.scrollTop = viewport.scrollHeight;
             }, 50);
         }
 
-        // Multimodal Attachment Pipeline
-        let selectedFileBase64 = null;
-        let selectedFileName = "";
-
-        function triggerFileInput() {
-            document.getElementById('camera-file-input').click();
-        }
-
-        function handleFileSelect(e) {
-            const file = e.target.files;
-            if (!file) return;
-            
-            selectedFileName = file.name;
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-                selectedFileBase64 = evt.target.result;
+        /**
+         * Input Image Ingestion Processing
+         */
+        function handleImageSelection() {
+            const input = document.getElementById('media-input');
+            if (input.files && input.files) {
+                const targetFile = input.files;
+                targetedImagePayload = targetFile.name; // Keep tracking descriptor reference
                 
-                // Show thumbnail bar component
-                document.getElementById('preview-thumb').src = selectedFileBase64;
-                document.getElementById('preview-filename').innerText = file.name;
-                document.getElementById('preview-bar').classList.remove('hidden');
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function clearAttachment() {
-            selectedFileBase64 = null;
-            selectedFileName = "";
-            document.getElementById('camera-file-input').value = "";
-            document.getElementById('preview-bar').classList.add('hidden');
-        }
-
-        function handleKeyPress(e) {
-            if (e.key === 'Enter') submitChatMessage();
-        }
-
-        function submitChatMessage() {
-            const input = document.getElementById('chat-input');
-            const queryText = input.value.trim();
-            
-            if (!queryText && !selectedFileBase64) return;
-
-            // Instantly append user message bubble to view log stream
-            chatHistory.push({
-                id: Date.now(),
-                sender: 'user',
-                text: queryText || `Uploaded attachment file: ${selectedFileName}`,
-                time: 'Just Now',
-                file: selectedFileBase64
-            });
-
-            // Re-render immediate view state state
-            renderAiCoachView();
-
-            // Fire simulated processing pipeline layout response
-            const indicator = document.getElementById('typing-indicator');
-            indicator.classList.remove('hidden');
-            
-            if (selectedFileBase64) {
-                showToast("Analyzing technique with Gemini AI...");
+                // Expose operational metadata warning banner
+                document.getElementById('preview-filename').innerText = targetFile.name;
+                document.getElementById('upload-preview-bar').classList.remove('hidden');
             }
-
-            // Clear buffers out
-            const textToProcess = queryText;
-            const activeFile = selectedFileBase64;
-            clearAttachment();
-            
-            setTimeout(() => {
-                let aiResponse = "";
-                
-                if (activeFile) {
-                    aiResponse = `[Gemini Payload Multi-part Matrix Processed] Biomechanical analysis computed: Your wrist positioning exhibits localized drift during delivery extension. Emulating Steffan Jones' isometric framework, ensure you lock the wrist joint angles with weighted-ball activation sets before live bowling.`;
-                } else {
-                    const lowercaseQuery = textToProcess.toLowerCase();
-                    if (lowercaseQuery.includes('bowling') || lowercaseQuery.includes('pace') || lowercaseQuery.includes('outswing')) {
-                        aiResponse = `Steffan Jones Paradigm Activated: To enforce true energy retention through completion, deploy the 4 Tent Peg alignment sequence (Ian Pont structure). Ensure the front foot plants firmly as an immovable brake to fling kinetic speed vertical parameters down the channel track.`;
-                    } else if (lowercaseQuery.includes('spin') || lowercaseQuery.includes('off-break')) {
-                        aiResponse = `Craig Howard & Peter Such Analysis: Ensure your index finger cuts through the ball apex at 45 degrees. To extract supreme flight variation drop variables like Mushtaq Ahmed, increase shoulder elevation at delivery axis point.`;
-                    } else {
-                        aiResponse = `Elite Tactical Response: Ensure your base centers fully beneath the core line of ball flight coordinates. Maintain soft hands following contact rules to systematically control ball acceleration trajectories.`;
-                    }
-                }
-
-                chatHistory.push({
-                    id: Date.now() + 1,
-                    sender: 'ai',
-                    text: aiResponse,
-                    time: 'Just Now',
-                    file: null
-                });
-
-                renderAiCoachView();
-            }, 1500);
         }
 
-        // Render Automated YouTube Data Admin Pipeline View
-        function renderAdminView() {
-            const mainContent = document.getElementById('main-content');
-            
-            let html = `
-                <div class="space-y-4 animate-in fade-in duration-200">
-                    <div>
-                        <h2 class="text-xl font-black text-white flex items-center gap-2">
-                            Automation Pipeline
-                        </h2>
-                        <p class="text-xs text-emerald-400/80 mt-1">Simulated YouTube Data API Live Content Scraper</p>
-                    </div>
+        /**
+         * Clear Context Upload Reference
+         */
+        function clearSelectedImage() {
+            document.getElementById('media-input').value = "";
+            targetedImagePayload = null;
+            document.getElementById('upload-preview-bar').classList.add('hidden');
+        }
 
-                    <div class="bg-gradient-to-r from-emerald-950 to-[#0c1710] border border-emerald-900/40 p-4 rounded-2xl shadow-md">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-bold text-white uppercase tracking-wider block">API Crawler Targets</span>
-                            <span class="text-[10px] bg-emerald-900 text-emerald-300 font-semibold px-2 py-0.5 rounded-full">Automated Mode</span>
-                        </div>
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="text-[10px] bg-[#0f2d1a] border border-emerald-800 text-slate-300 px-2 py-1 rounded-md">'cricket outswing tutorial'</span>
-                            <span class="text-[10px] bg-[#0f2d1a] border border-emerald-800 text-slate-300 px-2 py-1 rounded-md">'slips catching mechanics'</span>
-                            <span class="text-[10px] bg-[#0f2d1a] border border-emerald-800 text-slate-300 px-2 py-1 rounded-md">'cover drive masterclass'</span>
-                        </div>
-                    </div>
+        /**
+         * Message Dispatcher Engine
+         */
+        function dispatchMessage() {
+            const textInputField = document.getElementById('chat-input');
+            const promptText = textInputField.value.trim();
 
-                    <h3 class="text-xs font-extrabold uppercase text-slate-400 tracking-wider pt-2">Fetched Video Metadata Buffer (${adminPipelineVideos.length})</h3>
-                    
-                    <div class="space-y-3" id="admin-video-list">
-            `;
+            if (!promptText && !targetedImagePayload) return;
 
-            if (adminPipelineVideos.length === 0) {
-                html += `
-                    <div class="text-center p-8 bg-emerald-950/20 border border-emerald-900/30 rounded-2xl text-xs text-slate-400">
-                        <i data-lucide="inbox" class="w-8 h-8 mx-auto text-emerald-700 mb-2"></i>
-                        No pending automation assets in queue pipeline.
+            const scrollerContainer = document.getElementById('chat-scroller');
+
+            // 1. Process and Append User Bubble Layout Configuration
+            let imageContextLayout = "";
+            if (targetedImagePayload) {
+                imageContextLayout = `
+                    <div class="mb-1.5 flex items-center space-x-1.5 text-[10px] text-emerald-400 font-bold bg-slate-950/40 border border-slate-800 px-2 py-1 rounded-lg">
+                        <i class="fa-regular fa-image"></i>
+                        <span class="truncate">${targetedImagePayload}</span>
                     </div>
                 `;
-            } else {
-                adminPipelineVideos.forEach(v => {
-                    html += `
-                        <div id="video-row-${v.id}" class="bg-gradient-to-b from-[#132319] to-[#0d1a12] border border-emerald-900/40 rounded-xl p-3 flex flex-col gap-2.5 transition-all">
-                            <div class="flex items-start gap-3">
-                                <div class="w-24 aspect-video bg-black rounded-lg overflow-hidden shrink-0 relative border border-emerald-900/60">
-                                    <img src="https://img.youtube.com/vi/${v.youtubeId}/mqdefault.jpg" class="w-full h-full object-cover" />
-                                    <span class="absolute bottom-1 right-1 text-[8px] bg-black/80 px-1 py-0.2 text-white font-mono rounded">API</span>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <h4 class="text-xs font-bold text-white truncate">${v.title}</h4>
-                                    <p class="text-[10px] text-emerald-400 mt-0.5">${v.author}</p>
-                                    <p class="text-[9px] text-slate-500 mt-1 uppercase font-semibold tracking-wider">Target: ${v.category} -> ${v.skillKey.replace('_',' ')}</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-end gap-2 border-t border-emerald-900/20 pt-2.5">
-                                <button onclick="rejectPipelineVideo('${v.id}')" class="text-[10px] font-bold text-rose-400 bg-rose-950/40 border border-rose-900/40 px-3 py-1.5 rounded-lg active:scale-95 transition-all flex items-center gap-1">
-                                    <i data-lucide="trash-2" class="w-3 h-3"></i> Reject
-                                </button>
-                                <button onclick="approvePipelineVideo('${v.id}')" class="text-[10px] font-bold text-black bg-amber-500 px-3 py-1.5 rounded-lg active:scale-95 transition-all flex items-center gap-1 shadow-md shadow-amber-950/20">
-                                    <i data-lucide="check" class="w-3 h-3"></i> Approve & Deploy
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                });
             }
 
-            html += `</div></div>`;
-            mainContent.innerHTML = html;
-        }
+            const userNode = document.createElement('div');
+            userNode.className = "flex items-start space-x-3 justify-end ml-auto max-w-[85%]";
+            userNode.innerHTML = `
+                <div class="bg-emerald-500 text-slate-950 p-3 rounded-2xl rounded-tr-none shadow-md text-xs font-semibold">
+                    ${imageContextLayout}
+                    <p class="leading-relaxed">${promptText || "Analyzed attachment file configuration."}</p>
+                    <span class="text-[9px] text-slate-900/60 font-bold block mt-1 uppercase tracking-wider text-right">Player</span>
+                </div>
+            `;
+            scrollerContainer.appendChild(userNode);
 
-        // Wire Automated Dashboard Logic System
-        function approvePipelineVideo(id) {
-            const targetVideo = adminPipelineVideos.find(v => v.id === id);
-            if (!targetVideo) return;
+            // Clear operational indicators
+            textInputField.value = "";
+            clearSelectedImage();
+            autoScrollChatToTerminal();
 
-            // Route Data to Live Grid Content Database Component Matrix
-            const targetCategory = targetVideo.category;
-            const targetSkillKey = targetVideo.skillKey;
-            
-            const liveSkill = skillsData[targetCategory].skills.find(s => s.key === targetSkillKey);
-            if (liveSkill) {
-                // Dynamically swap/update the drill video to the approved video item
-                liveSkill.drillVideo = targetVideo.youtubeId;
-            }
-
-            // Remove item from simulated pipeline queue state
-            adminPipelineVideos = adminPipelineVideos.filter(v => v.id !== id);
-            
-            showToast("Video deployed live to Skill Tab components successfully!");
-            renderAdminView();
-            lucide.createIcons();
-        }
-
-        function rejectPipelineVideo(id) {
-            adminPipelineVideos = adminPipelineVideos.filter(v => v.id !== id);
-            showToast("Video rejected and cleared from buffer.");
-            renderAdminView();
-            lucide.createIcons();
-        }
-
-        // Global Toast Notification Helper
-        function showToast(text) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-text').innerText = text;
-            toast.classList.remove('hidden');
+            // 2. Trigger Mock Response Sequence
             setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 3000);
+                const assistantNode = document.createElement('div');
+                assistantNode.className = "flex items-start space-x-3 max-w-[85%]";
+                assistantNode.innerHTML = `
+                    <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i class="fa-solid fa-robot text-xs text-slate-950"></i>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-3 rounded-2xl rounded-tl-none shadow-md">
+                        <p class="text-xs text-slate-200 leading-relaxed">Processing telemetry... Your elbow configuration indicates stable positioning, but verify your front foot axis matches the linear vectors outlined in the <strong>Syllabus</strong> video module.</p>
+                        <span class="text-[9px] text-slate-500 font-semibold block mt-1.5 uppercase tracking-wider">CricCoach Core</span>
+                    </div>
+                `;
+                scrollerContainer.appendChild(assistantNode);
+                autoScrollChatToTerminal();
+            }, 1000);
+        }
+
+        /**
+         * Admin Hub Production Append Engine
+         */
+        function executeAdminPublish() {
+            const titleInput = document.getElementById('admin-drill-title');
+            const idInput = document.getElementById('admin-drill-id');
+
+            const moduleTitle = titleInput.value.trim();
+            const youtubeId = idInput.value.trim();
+
+            if (!moduleTitle || !youtubeId) {
+                alert("Please fill in both input fields correctly.");
+                return;
+            }
+
+            // Target Syllabus Layout Wrapper Container Element
+            const syllabusTargetContainer = document.querySelector('#view-drills .space-y-4');
+
+            // Generate New Object Node layout cleanly 
+            const newCard = document.createElement('div');
+            newCard.className = "bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-lg group";
+            newCard.innerHTML = `
+                <div class="relative aspect-video w-full bg-slate-950">
+                    <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/${youtubeId}" title="${moduleTitle}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="p-3.5">
+                    <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1">
+                        <span class="text-emerald-400"><i class="fa-solid fa-circle-play mr-1"></i>Curated Module</span>
+                        <span>Custom Duration</span>
+                    </div>
+                    <h3 class="text-sm font-bold text-white tracking-tight">${moduleTitle}</h3>
+                    <p class="text-xs text-slate-400 mt-1">Custom training and execution content appended dynamically via Curator Ingestion panel.</p>
+                </div>
+            `;
+
+            // Prepend new card object cleanly to user interface feed top index location
+            syllabusTargetContainer.insertBefore(newCard, syllabusTargetContainer.firstChild);
+
+            // Clean form state variables
+            titleInput.value = "";
+            idInput.value = "";
+
+            // Push client state tracking frame view direction update 
+            alert("Syllabus array appended successfully!");
+            switchTab('drills');
         }
     </script>
 </body>
