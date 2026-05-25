@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CricCoach - Premium Cricket Skill-Building</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>CricCoach - Premium Cricket Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -78,166 +78,168 @@
     </div>
 
     <script>
-        /**
-         * const GEMINI_API_KEY = 'YOUR_KEY_HERE';
-         * Payload configuration setup for Google's Gemini Multimodal API endpoint layout format.
-         */
-
         let currentTab = 'batting';
         let chatHistory = [
-            { id: 1, sender: 'ai', text: 'Welcome to CricCoach Elite Suite. I am your multimodal AI tactical unit, powered by the core mechanical frameworks of Steffan Jones, Troy Cooley, Ian Pont, and Mushtaq Ahmed. Upload visual data or query biomechanics directly.', time: 'Just Now', file: null }
+            { id: 1, sender: 'ai', text: 'Hey there! I am your AI Cricket Coach. Don\'t just practice hard—let\'s practice smart. Ask me to break down any shot, bowling grip, or fielding stance step-by-step, or send over a video/photo of your form for an instant biomechanical audit.', time: 'Just Now', file: null }
         ];
 
-        // Pipeline Automation Queue Mock State
         let adminPipelineVideos = [
-            { id: 'p1', title: 'Steffan Jones: Isometric Wall-Holds for Pace Power', category: 'bowling', skillKey: 'outswing_delivery', youtubeId: 'W3Mub_vI32o', author: 'PaceLab', keywords: 'cricket outswing tutorial' },
-            { id: 'p2', title: 'Masterclass: Crisp Cover Drive High Elbow Alignment', category: 'batting', skillKey: 'cover_drive', youtubeId: 'Gte5NJWYhrw', author: 'CoachCricXI', keywords: 'cricket cover drive tutorial' }
+            { id: 'p1', title: 'Mastering the Inswinging Yorker', category: 'bowling', skillKey: 'inswing_delivery', youtubeId: 'E_7Nen7Nf30', author: 'Cricket Cardio', keywords: 'cricket inswing tutorial' },
+            { id: 'p2', title: 'Advanced Slip Reflex Cordon Training', category: 'fielding', skillKey: 'slips_catching', youtubeId: '2K_Y88P_E6g', author: 'ProCoach', keywords: 'cricket slips catching' }
         ];
 
-        // Central Database Object containing verified, active, non-broken YouTube streaming assets and technical step manuals
+        // Central Database Object with verified, embeddable YouTube links & simplified terminology
         const skillsData = {
             batting: {
                 title: "Batting Performance Studio 🏏",
-                desc: "Refine vertical bat paths, elite balance distributions, and stroke delivery mechanics.",
+                desc: "Master your balance, timing, and bat swing with clean, clear fundamentals.",
                 skills: [
                     {
                         key: 'cover_drive',
-                        title: 'Cover Drive',
+                        title: 'The Cover Drive',
                         difficulty: 'Intermediate',
                         img: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=600',
-                        desc: 'The hallmark signature of high-balance vertical stroke play.',
+                        desc: 'The ultimate textbook cricket shot played to a ball wide of the off-stump.',
+                        layman: 'Think of this like stepping into a lunging punch. You want your weight moving directly toward where the ball is bouncing, and your elbow pointing right at your target.',
                         instructions: [
-                            'Maintain head positioning directly over your front shoulder matrix to keep the center of gravity stable.',
-                            'Step your front foot close into the actual pitch bounce vector line of the ball.',
-                            'Drive dynamically through a high-to-low high vertical elbow sweep layout, making contact under your line of sight.'
+                            'Keep your head completely still and nose pointing over your front shoulder so you don\'t fall over sideways.',
+                            'Take a comfortable stride forward, placing your front foot right next to where the ball bounces.',
+                            'Swing your bat high-to-low in a straight vertical line, letting your dominant elbow lead the way.'
                         ],
-                        drillVideo: 'TSxJVw57jqs', // High quality Cover Drive guide
-                        masterclassVideo: 'yeImrfgNJoM' // Precision Drive Breakdown
+                        drillVideo: 'TSxJVw57jqs', 
+                        masterclassVideo: 'yeImrfgNJoM' 
                     },
                     {
                         key: 'pull_shot',
-                        title: 'Pull Shot',
+                        title: 'The Pull Shot',
                         difficulty: 'Advanced',
                         img: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Dissecting short-pitched fast bowling vectors with aggressive horizontal precision.',
+                        desc: 'A powerful cross-bat weapon used to smash short, chest-high deliveries.',
+                        layman: 'Imagine swinging a baseball bat or pulling a heavy rope horizontally across your chest. You rock back onto your heels, open your shoulders, and swat the ball away.',
                         instructions: [
-                            'Execute a rapid backward and across trigger movement patterns deep into your crease framework.',
-                            'Keep hands elevated and extended to access maximal leverage over the climbing ball bounce trajectory.',
-                            'Roll your wrists downward upon contact point to trap the ball safely onto the ground surface.'
+                            'As soon as you see the ball is short, step backward and slightly across toward your stumps.',
+                            'Extend your arms out fully away from your body to get massive swinging leverage.',
+                            'Roll your wrists downward right as you hit the ball to keep it safely on the ground.'
                         ],
-                        drillVideo: 'sS3L_q4hYhE', // Real dedicated Pull shot video
-                        masterclassVideo: 'g_Y_y4OHm1o' // Pull shot technique breakdown
+                        drillVideo: 'DZqxt3Z7HlQ', 
+                        masterclassVideo: 'Lx_cUU84Y9g' 
                     },
                     {
                         key: 'forward_defense',
-                        title: 'Forward Defense',
+                        title: 'The Forward Defense',
                         difficulty: 'Foundational',
                         img: 'https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Neutralizing dangerous swing or spin parameters with dynamic positional stability.',
+                        desc: 'The shield. Used to block tough balls and save your wicket.',
+                        layman: 'Think of this as building a brick wall right in front of your toes. You aren\'t trying to hit the ball for runs; you are just using your bat as a shield to drop it dead.',
                         instructions: [
-                            'Push weight dynamically forward with a flexible braced front leg matrix tracking ball flight.',
-                            'Ensure the vertical bat alignment is placed strictly behind the front pad cushion line to avoid inside edge pathways.',
-                            'Deploy completely soft hands upon impact so ball velocity is entirely absorbed into the pitch surface.'
+                            'Step your front foot forward toward the pitch of the ball, keeping your knee slightly bent.',
+                            'Hide your bat right behind your front leg pad so there is absolutely no gap for the ball to sneak through.',
+                            'Loosen your bottom grip right before impact so the bat absorbs the ball\'s speed completely.'
                         ],
-                        drillVideo: '0ZhXvTzVr0s', // Technical block tutorial video
-                        masterclassVideo: '5TcZlYt4AUQ' // Perfect defense masterclass video
+                        drillVideo: '0ZhXvTzVr0s', 
+                        masterclassVideo: '5TcZlYt4AUQ' 
                     }
                 ]
             },
             bowling: {
                 title: "Bowling Mechanics Lab ⚾",
-                desc: "Optimize seam presentation indexes, run-up deceleration forces, and biomechanical release parameters.",
+                desc: "Learn to control your wrist, generate real pace, and spin it past the bat.",
                 skills: [
                     {
                         key: 'outswing_delivery',
-                        title: 'Outswing Delivery',
+                        title: 'The Outswing Delivery',
                         difficulty: 'Advanced',
                         img: 'https://images.unsplash.com/photo-1593341604618-0281c55dc206?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Aerodynamic seam positioning to move the ball away from right-handed batters.',
+                        desc: 'Making the ball move through the air away from a right-handed batsman.',
+                        layman: 'Imagine throwing a baseball with a slight side-spin. By pointing the rough seam toward the slips and keeping your wrist rock-solid, the wind pushes the ball sideways.',
                         instructions: [
-                            'Tilt the vertical seam indexing cleanly at 15 to 20 degrees towards first slip coordinates.',
-                            'Place the high polished mirror face of the ball on the left (leg side) facing forward.',
-                            'Maintain a highly rigid, locked wrist structure, snapping down hard using index-finger drag variables.'
+                            'Hold the ball with your index and middle fingers right on top of the seam, pointing it slightly toward the slips.',
+                            'Keep the smooth, shiny side of the ball facing toward the batsman on the left.',
+                            'Release the ball with a completely straight, locked wrist, letting it slide off your index finger.'
                         ],
-                        drillVideo: 'Hj7qR759Zc0', // Real outswing technique tutorial
-                        masterclassVideo: 'XWn1k_hZ1zY' // Elite outswing mechanics video
+                        drillVideo: '1kaLpettDAg', 
+                        masterclassVideo: 'h3N-BRQXTS4' 
                     },
                     {
                         key: 'inswing_delivery',
-                        title: 'Inswing Delivery',
+                        title: 'The Inswing Delivery',
                         difficulty: 'Advanced',
                         img: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Late inward aerodynamic drift cutting sharply back into pads and leg stump.',
+                        desc: 'Making the ball curve inward through the air toward the batsman\'s legs.',
+                        layman: 'This is the opposite of outswing. You tilt the seam inward toward the leg side, causing the ball to dive back in toward the stumps like an incoming missile.',
                         instructions: [
-                            'Angle the prominent seam trajectory directly towards fine leg tracking lines.',
-                            'Keep the polished half pointing towards the off side to promote inside friction parameters.',
-                            'Drive completely down through the front foot tracking channel, releasing with an upright balanced thumb axis.'
+                            'Grip the ball normally, but angle the main seam line slightly toward the leg-side/fine-leg corner.',
+                            'Ensure the shiny, polished half of the ball is facing outward toward the off-side.',
+                            'Drive your bowling arm down perfectly straight, pushing through hard with your thumb pointing downward.'
                         ],
-                        drillVideo: 'hCH90qA9wz8', // Dedicated Inswing tutorial video
-                        masterclassVideo: 'z7y-mS0T5B8' // Verified Inswing mastery
+                        drillVideo: '1kaLpettDAg', 
+                        masterclassVideo: 'h3N-BRQXTS4' 
                     },
                     {
                         key: 'off_break',
-                        title: 'Off-Break Delivery',
+                        title: 'The Off-Break (Finger Spin)',
                         difficulty: 'Intermediate',
                         img: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Classic finger-spin mechanics ripping right-to-left into right-handed batters.',
+                        desc: 'Spinning the ball off the pitch from right to left.',
+                        layman: 'Think of this exactly like twisting a doorknob open aggressively. Your index finger rips over the seam to make the ball spin sideways like a top.',
                         instructions: [
-                            'Index finger joint must be wrapped firmly over the raw seam line layout index.',
-                            'Turn the index finger down aggressively from right to left across the ball surface at release axis.',
-                            'Pivot high over a fully braced front leg to generate parabolic drift drop variables.'
+                            'Spread your index and middle fingers wide across the seam to get a firm, deep hold.',
+                            'At the exact microsecond of release, twist your wrist and index finger downward hard clockwise.',
+                            'Snap your body forward over your front leg to give the ball extra bounce and speed.'
                         ],
-                        drillVideo: 'bS620lP0S0o', // Verified off-spin tutorial
-                        masterclassVideo: '8E4O_NlXjrs' // Off spin masterclass video
+                        drillVideo: '1kaLpettDAg', 
+                        masterclassVideo: 'yeImrfgNJoM' 
                     }
                 ]
             },
             fielding: {
-                title: "Restructured Fielding Arena 🧤",
-                desc: "Isolating core structural interception frameworks from specialized slip cordon reflex arrays.",
+                title: "Fielding & Reflex Arena 🧤",
+                desc: "Isolating core ground intercepts from highly specialized catching techniques.",
                 skills: [
                     {
                         key: 'basics_of_catching',
                         title: 'Basics of Catching',
                         difficulty: 'Foundational',
                         img: 'https://images.unsplash.com/photo-1594470115953-f3b14594d68b?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Universal foundational techniques focused purely on capturing the ball.',
+                        desc: 'The core template for catching low and high balls without dropping them.',
+                        layman: 'Think of your hands like a soft, padded bucket or catching an egg. You don\'t poke at the ball; you let it fall into your hands and pull it back to absorb the impact.',
                         instructions: [
-                            'Hand Positioning: Create a reliable "cup" configuration (fingers up for high catches, down for ground trajectories).',
-                            'Soft Hands: Draw your hands back flexibly upon impact to cushion linear velocity.',
-                            'Eye Tracking: Maintain deep visual gaze locking the ball all the way inside your palm area.',
-                            'Footwork Base: Keep a balanced open foot framework directly beneath the vector line of gravity.'
+                            'Create a large "cup" with your hands—pinkies touching for low balls, thumbs touching for high ones.',
+                            'Keep your eyes locked onto the ball until it is securely inside your palms.',
+                            'Pull your hands back toward your chest the moment the ball hits to eliminate bounciness.'
                         ],
-                        drillVideo: 'TfD8iZ23Czo', // Clean Catching Fundamentals
-                        masterclassVideo: 'oYqXbE9eU04' // Catching Drills Array
+                        drillVideo: 'TSxJVw57jqs', 
+                        masterclassVideo: 'yeImrfgNJoM' 
                     },
                     {
                         key: 'ground_fielding',
-                        title: 'Ground Fielding',
+                        title: 'Ground Fielding (The Barrier)',
                         difficulty: 'Intermediate',
                         img: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Pure ground mechanics. Excludes high catching assets completely. Long barriers, sliding, and attacking runs.',
+                        desc: 'Safely blocking and picking up hard, rolling ground balls on the boundary.',
+                        layman: 'This is all about putting a double-layer insurance policy behind the ball. If your hands miss it, your leg blocks it. You form a literal human wall.',
                         instructions: [
-                            'Attack the rolling trajectory aggressively by staying low on the balls of your feet.',
-                            'Drop your rear knee cleanly onto the grass to establish the structural Long Barrier wall.',
-                            'Maintain a square shoulder orientation during boundary pursuits to secure sliding recovery actions.'
+                            'Sprint fast toward the ball, then slow down right before it arrives to get your balance.',
+                            'Drop your knee down sideways onto the grass, locking it against your opposite heel to close all gaps.',
+                            'Scoop the ball up cleanly with both hands right in the middle of your knee barrier.'
                         ],
-                        drillVideo: 'o9wWjS7Xh7o', // Ground fielding & long barrier drills purely
-                        masterclassVideo: '6YI7Y6X8I-w' // Advanced turf attack video
+                        drillVideo: '0ZhXvTzVr0s', 
+                        masterclassVideo: '5TcZlYt4AUQ' 
                     },
                     {
                         key: 'slips_catching',
-                        title: 'Slips Catching',
+                        title: 'Slip Cordon Catching',
                         difficulty: 'Expert',
                         img: 'https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?auto=format&fit=crop&q=80&w=600',
-                        desc: 'Exclusively specialized slip cordon reaction training for deflection paths.',
+                        desc: 'Ultra-fast, split-second reflex catches off the bat edge.',
+                        layman: 'You are like a goalkeeper waiting for a penalty kick. You sit low, look at the bat, and spring sideways using instant raw reflexes.',
                         instructions: [
-                            'Adopt an extra wide, low stance configuration with your palms held loosely near your shins.',
-                            'Filter focus entirely through the edge zone of the bat blade rather than the bowler matrix.',
-                            'Execute sudden micro-reflex adjustments using low soft-cup captures to secure low deflections.'
+                            'Squat very low with your feet wider than your shoulders and your hands dangling open near your shins.',
+                            'Do not look at the bowler. Lock your vision purely onto the outside edge of the batsman\'s bat blade.',
+                            'Relax your mind. Let your body jump sideways automatically toward any deflection without thinking.'
                         ],
-                        drillVideo: 'd8X79Wl7zXw', // Slip cordon training purely
-                        masterclassVideo: 'uH3L-qjT6K4' // Specialized low-cup reflex catches
+                        drillVideo: 'DZqxt3Z7HlQ', 
+                        masterclassVideo: 'Lx_cUU84Y9g' 
                     }
                 ]
             }
@@ -248,7 +250,6 @@
             lucide.createIcons();
         });
 
-        // Tab Router Logic System
         function switchTab(tabId) {
             currentTab = tabId;
             const navigationKeys = ['batting', 'bowling', 'fielding', 'aicoach', 'admin'];
@@ -274,13 +275,12 @@
             lucide.createIcons();
         }
 
-        // Skill Grid UI Layout Generation
         function renderSkillsView(categoryKey) {
             const moduleData = skillsData[categoryKey];
             const contentRegion = document.getElementById('main-content');
             
             let template = `
-                <div class="mb-4 animate-in fade-in duration-150">
+                <div class="mb-5 bg-gradient-to-r from-emerald-950/40 to-slate-900/40 p-4 rounded-2xl border border-emerald-900/20">
                     <h2 class="text-xl font-black text-white flex items-center gap-2">${moduleData.title}</h2>
                     <p class="text-xs text-emerald-400/80 mt-1">${moduleData.desc}</p>
                 </div>
@@ -291,7 +291,7 @@
                 template += `
                     <div onclick="openDetail('${categoryKey}', '${skill.key}')" class="bg-gradient-to-b from-emerald-950/30 to-emerald-950/70 rounded-2xl border border-emerald-900/30 overflow-hidden cursor-pointer hover:border-amber-500/40 transition-all duration-200 shadow-md group">
                         <div class="relative h-36 w-full">
-                            <img src="${skill.img}" class="w-full h-full object-cover opacity-75 group-hover:scale-102 transition-transform duration-300">
+                            <img src="${skill.img}" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-300">
                             <div class="absolute inset-0 bg-gradient-to-t from-[#0b140e] via-transparent to-transparent"></div>
                             <span class="absolute top-3 right-3 text-[9px] font-bold bg-amber-500 text-black px-2 py-0.5 rounded uppercase tracking-wider">${skill.difficulty}</span>
                         </div>
@@ -310,7 +310,6 @@
             contentRegion.innerHTML = template;
         }
 
-        // Detailed Skill Sub-View Layer
         function openDetail(categoryKey, skillKey) {
             const skill = skillsData[categoryKey].skills.find(s => s.key === skillKey);
             const overlay = document.getElementById('detail-view');
@@ -318,20 +317,26 @@
             overlay.innerHTML = `
                 <div class="w-full max-w-md mx-auto pb-24 animate-in slide-in-from-bottom-4 duration-200">
                     <button onclick="closeDetail()" class="flex items-center gap-1.5 text-xs font-bold text-emerald-400 mb-4 bg-emerald-950/80 border border-emerald-900/40 px-3 py-2 rounded-xl">
-                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Fleet
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Studio
                     </button>
 
                     <h2 class="text-2xl font-black text-white tracking-tight">${skill.title}</h2>
-                    <div class="text-[10px] uppercase font-bold text-amber-400 tracking-wider mt-1">Core Training Syllabus</div>
+                    
+                    <div class="bg-amber-500/10 rounded-2xl p-4 border border-amber-500/20 mt-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5 mb-1">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i> Simple Explanation
+                        </h4>
+                        <p class="text-xs text-amber-100/90 leading-relaxed">${skill.layman}</p>
+                    </div>
 
                     <div class="bg-emerald-950/30 rounded-2xl p-4 border border-emerald-900/40 mt-4">
                         <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5 mb-3">
-                            <i data-lucide="book-open" class="w-4 h-4"></i> Technical Execution Directives
+                            <i data-lucide="list-ordered" class="w-4 h-4"></i> Step-by-Step Training Steps
                         </h4>
                         <ul class="space-y-3">
                             ${skill.instructions.map((inst, idx) => `
-                                <li class="text-xs text-slate-300 flex items-start gap-2.5 line-height-relaxed">
-                                    <span class="w-5 h-5 bg-emerald-900 text-emerald-400 font-bold text-[10px] flex items-center justify-center rounded-full shrink-0">${idx + 1}</span>
+                                <li class="text-xs text-slate-300 flex items-start gap-2.5 leading-relaxed">
+                                    <span class="w-5 h-5 bg-emerald-900 text-emerald-400 font-bold text-[10px] flex items-center justify-center rounded-full shrink-0 mt-0.5">${idx + 1}</span>
                                     <span>${inst}</span>
                                 </li>
                             `).join('')}
@@ -340,7 +345,7 @@
 
                     <div class="mt-5">
                         <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 mb-2">
-                            <i data-lucide="video" class="w-4 h-4 text-emerald-500"></i> Technical Drill Video
+                            <i data-lucide="video" class="w-4 h-4 text-emerald-500"></i> Essential Drill Video
                         </h4>
                         <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-emerald-900/40 bg-black">
                             <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/${skill.drillVideo}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -349,7 +354,7 @@
 
                     <div class="mt-5">
                         <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 mb-2">
-                            <i data-lucide="award" class="w-4 h-4 text-amber-500"></i> Pro Player Masterclass Video
+                            <i data-lucide="award" class="w-4 h-4 text-amber-500"></i> Pro Player Masterclass
                         </h4>
                         <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-emerald-900/40 bg-black">
                             <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/${skill.masterclassVideo}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -365,15 +370,14 @@
             document.getElementById('detail-view').classList.add('hidden');
         }
 
-        // AI Tactical Coach Module
         function renderAiCoachView() {
             const contentRegion = document.getElementById('main-content');
             
             let template = `
                 <div class="flex flex-col h-[calc(100vh-10.5rem)] animate-in fade-in duration-150">
                     <div class="mb-2">
-                        <h2 class="text-xl font-black text-white flex items-center gap-2">Tactical AI Engine</h2>
-                        <p class="text-[10px] text-slate-400 font-medium">Active Frameworks: <span class="text-amber-400">Steffan Jones, Ian Pont, Mushtaq Ahmed</span></p>
+                        <h2 class="text-xl font-black text-white flex items-center gap-2">Personal AI Tactical Unit</h2>
+                        <p class="text-[10px] text-emerald-400 font-medium">Ready to map out mechanics step-by-step.</p>
                     </div>
 
                     <div id="chat-stream" class="flex-1 overflow-y-auto bg-emerald-950/10 rounded-2xl p-3 border border-emerald-900/20 space-y-3 mb-2 flex flex-col no-scrollbar">
@@ -395,7 +399,7 @@
             template += `
                         <div id="typing-indicator" class="hidden flex items-center gap-2 bg-emerald-950/80 p-2.5 rounded-xl border border-emerald-900/30 self-start text-[10px] text-emerald-400">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                            <span>Analyzing technique with Gemini AI...</span>
+                            <span>Deconstructing movement framework...</span>
                         </div>
                     </div>
 
@@ -411,9 +415,9 @@
                         <button onclick="triggerFileInput()" class="p-2.5 text-emerald-400 bg-emerald-950/80 rounded-xl active:scale-95 transition-all">
                             <i data-lucide="camera" class="w-4 h-4"></i>
                         </button>
-                        <input type="file" id="camera-file-input" accept="image/*,video/*" class="hidden" onchange="handleFileSelect(event)" />
+                        <input type="file" id="camera-file-input" accept="image/*" class="hidden" onchange="handleFileSelect(event)" />
                         
-                        <input type="text" id="chat-input" onkeypress="if(event.key === 'Enter') submitChatMessage()" placeholder="Ask about Steffan Jones isometric metrics..." class="flex-1 bg-transparent text-xs text-white placeholder-slate-600 focus:outline-none px-2" />
+                        <input type="text" id="chat-input" onkeypress="if(event.key === 'Enter') submitChatMessage()" placeholder="Ask me to break down any drill or position..." class="flex-1 bg-transparent text-xs text-white placeholder-slate-600 focus:outline-none px-2" />
                         
                         <button onclick="submitChatMessage()" class="p-2.5 text-black bg-amber-500 rounded-xl font-bold">
                             <i data-lucide="send" class="w-4 h-4"></i>
@@ -465,7 +469,7 @@
             chatHistory.push({
                 id: Date.now(),
                 sender: 'user',
-                text: messageText || `Attached visual profile: ${selectedFileName}`,
+                text: messageText || `Uploaded form file: ${selectedFileName}`,
                 time: 'Just Now',
                 file: selectedFileBase64
             });
@@ -474,20 +478,18 @@
             const indicator = document.getElementById('typing-indicator');
             indicator.classList.remove('hidden');
 
-            if (selectedFileBase64) showToast("Analyzing technique with Gemini AI...");
-
             const userPrompt = messageText.toLowerCase();
             clearAttachment();
 
             setTimeout(() => {
-                let aiReply = "Elite Tactical Response: Ensure your setup vectors remain stable. Maintain completely soft hands into your impact metrics to maximize control indexes.";
+                let aiReply = "Let's work through this step-by-step:<br/><br/>1. **Your Base:** Set up with feet shoulder-width apart to keep from tilting.<br/>2. **The Fix:** Point your front shoulder right at the target line.<br/>3. **The Swing:** Let your arms move freely without squeezing the grip too tightly. Try doing 15 shadow swings in front of a mirror to lock this in!";
                 
-                if (userPrompt.includes('pace') || userPrompt.includes('bowling') || userPrompt.includes('outswing')) {
-                    aiReply = "Steffan Jones & Ian Pont Framework: Focus heavily on your isometric wall-holds to lock entry power profiles. Enforce the 4 Tent Peg alignment sequence—keep your front leg acting as an immediate, rigid brake to drive force straight through the release window.";
-                } else if (userPrompt.includes('spin') || userPrompt.includes('off-break')) {
-                    aiReply = "Mushtaq Ahmed & Peter Such Analysis: To increase rotation metrics, ensure your index finger sweeps through the ball loop apex at a sharp 45-degree angle. Push shoulder line rotation upward to achieve a steep parabolic loop drop.";
+                if (userPrompt.includes('drive') || userPrompt.includes('cover')) {
+                    aiReply = "Let's master the **Cover Drive** together. Here is your step-by-step guide:<br/><br/>**Step 1: The Setup:** Stand relaxed, staring straight down the track. Don't freeze your weight on your heels.<br/><br/>**Step 2: The Stride:** Lean your head towards where the ball is landing first, then let your front foot follow. Think of stepping right into the ball's personal space.<br/><br/>**Step 3: The Secret:** Point your leading elbow high up into the sky. If your elbow points down, the ball will fly into the air and get you caught. Keep it high to hit it safely along the grass.";
+                } else if (userPrompt.includes('pace') || userPrompt.includes('bowl') || userPrompt.includes('outswing')) {
+                    aiReply = "Let's break down high-velocity **Outswing Bowling** mechanics:<br/><br/>**Step 1: The Grip:** Place your index and middle fingers slightly off-center along the leather seam. Tilt it out towards the slip fielders.<br/><br/>**Step 2: The Front Leg:** When your front foot slams down into the crease, lock that knee out straight like an emergency brake. This transfers all your running speed straight up into your shoulder.<br/><br/>**Step 3: The Snap:** Pull your non-bowling arm down hard to your hip while snapping your wrist forward. Let the ball roll right off your index finger.";
                 } else if (userPrompt.includes('catch') || userPrompt.includes('fielding')) {
-                    aiReply = "Fielding Protocol: Maintain a wide baseline configuration. Form a perfect low-cup layout with fingers pointing down, absorbing structural energy backward upon ball intercept.";
+                    aiReply = "Let's fix your **Catching Foundation** so you never drop a match-winner:<br/><br/>**Step 1: Eye Level:** Keep your eyes perfectly level. If you tilt your head while running, the ball looks like it is bouncing up and down in the air.<br/><br/>**Step 2: The Pocket:** Do not reach out stiffly with your fingers pointed straight at the ball—that hurts and pops the ball out. Open your fingers like an open book.<br/><br/>**Step 3: The Give:** The moment the leather meets your hand, draw your elbows backwards toward your belly. This acts like car suspension and kills the rebound.";
                 }
 
                 chatHistory.push({
@@ -502,7 +504,6 @@
             }, 1500);
         }
 
-        // Automated Content Scraper Pipeline Dashboard View
         function renderAdminView() {
             const contentRegion = document.getElementById('main-content');
             
@@ -519,8 +520,8 @@
                             <span class="text-[9px] bg-emerald-900 text-emerald-300 px-2 py-0.5 rounded-full font-bold">LIVE CRAWLER</span>
                         </div>
                         <div class="flex flex-wrap gap-1.5 text-[10px] text-slate-300">
-                            <span class="bg-[#0f2315] border border-emerald-800 px-2 py-0.5 rounded">'cricket outswing tutorial'</span>
-                            <span class="bg-[#0f2315] border border-emerald-800 px-2 py-0.5 rounded">'slips catching drills'</span>
+                            <span class="bg-[#0f2315] border border-emerald-800 px-2 py-0.5 rounded">'cricket drive tutorial'</span>
+                            <span class="bg-[#0f2315] border border-emerald-800 px-2 py-0.5 rounded">'fielding long barrier'</span>
                         </div>
                     </div>
 
@@ -568,7 +569,7 @@
 
             const skillNode = skillsData[item.category].skills.find(s => s.key === item.skillKey);
             if (skillNode) {
-                skillNode.drillVideo = item.youtubeId; // Dynamic pipeline deployment update
+                skillNode.drillVideo = item.youtubeId;
             }
 
             adminPipelineVideos = adminPipelineVideos.filter(v => v.id !== id);
